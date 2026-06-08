@@ -15,7 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [24]
+        # Node 22 (LTS): pnpm 11 requires Node >=22.13, and Playwright 1.59's
+        # browser install hangs after the Chromium download on Node 24.
+        node-version: [22]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -26,8 +28,6 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          # Node 22 (LTS): pnpm 11 requires Node >=22.13, and Playwright 1.59's
-          # browser install hangs after the Chromium download on Node 24.
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 

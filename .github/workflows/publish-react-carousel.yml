@@ -1,9 +1,9 @@
-name: Publish @boject/react-carousel
+name: Publish @bojectify/react-carousel
 
 on:
   push:
     tags:
-      - '@boject/react-carousel@*'
+      - '@bojectify/react-carousel@*'
 
 permissions:
   contents: read
@@ -29,7 +29,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm nx build @boject/react-carousel
+      - run: pnpm nx build @bojectify/react-carousel
 
       - run: npm publish --provenance --access public
         working-directory: packages/react-carousel

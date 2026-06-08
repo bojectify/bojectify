@@ -1,26 +1,26 @@
-.boject-reveal {
-  animation-duration: var(--boject-reveal-duration);
-  animation-delay: var(--boject-reveal-delay);
-  animation-timing-function: var(--boject-reveal-easing);
+.bojectify-reveal {
+  animation-duration: var(--bojectify-reveal-duration);
+  animation-delay: var(--bojectify-reveal-delay);
+  animation-timing-function: var(--bojectify-reveal-easing);
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.boject-reveal--fade-in {
+.bojectify-reveal--fade-in {
   opacity: 0;
-  animation-name: boject-reveal-fade-in;
+  animation-name: bojectify-reveal-fade-in;
 }
 
-.boject-reveal--transform {
-  transform: var(--boject-reveal-transform);
-  animation-name: boject-reveal-transform;
+.bojectify-reveal--transform {
+  transform: var(--bojectify-reveal-transform);
+  animation-name: bojectify-reveal-transform;
 }
 
-.boject-reveal--fade-in.boject-reveal--transform {
-  animation-name: boject-reveal-fade-in, boject-reveal-transform;
+.bojectify-reveal--fade-in.bojectify-reveal--transform {
+  animation-name: bojectify-reveal-fade-in, bojectify-reveal-transform;
 }
 
-@keyframes boject-reveal-fade-in {
+@keyframes bojectify-reveal-fade-in {
   0% {
     opacity: 0;
   }
@@ -29,7 +29,7 @@
   }
 }
 
-@keyframes boject-reveal-transform {
+@keyframes bojectify-reveal-transform {
   100% {
     transform: translate(0);
   }

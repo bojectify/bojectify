@@ -1,9 +1,9 @@
-# @boject/react-reveal
+# @bojectify/react-reveal
 
-[![CI](https://github.com/bojectify/boject/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/boject/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/@boject/react-reveal)](https://www.npmjs.com/package/@boject/react-reveal)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@boject/react-reveal)](https://bundlephobia.com/package/@boject/react-reveal)
-[![License](https://img.shields.io/npm/l/@boject/react-reveal)](https://github.com/bojectify/boject/blob/main/LICENSE)
+[![CI](https://github.com/bojectify/bojectify/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/bojectify/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@bojectify/react-reveal)](https://www.npmjs.com/package/@bojectify/react-reveal)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@bojectify/react-reveal)](https://bundlephobia.com/package/@bojectify/react-reveal)
+[![License](https://img.shields.io/npm/l/@bojectify/react-reveal)](https://github.com/bojectify/bojectify/blob/main/LICENSE)
 
 CSS animation wrapper for React. Fade and slide elements into view with zero JavaScript animation — pure CSS transitions driven by props.
 
@@ -12,14 +12,14 @@ RSC-compatible. No `"use client"` directive required.
 ## Install
 
 ```bash
-npm install @boject/react-reveal react
+npm install @bojectify/react-reveal react
 ```
 
 ## Usage
 
 ```tsx
-import { Reveal } from '@boject/react-reveal';
-import '@boject/react-reveal/styles.css';
+import { Reveal } from '@bojectify/react-reveal';
+import '@bojectify/react-reveal/styles.css';
 
 <Reveal>
   <h1>Fades and slides up</h1>
@@ -61,11 +61,11 @@ All other HTML attributes are spread onto the root element.
 Override these for global theming:
 
 ```css
-.boject-reveal {
-  --boject-reveal-duration: 800ms;
-  --boject-reveal-delay: 0ms;
-  --boject-reveal-distance: 36px;
-  --boject-reveal-easing: ease-out;
+.bojectify-reveal {
+  --bojectify-reveal-duration: 800ms;
+  --bojectify-reveal-delay: 0ms;
+  --bojectify-reveal-distance: 36px;
+  --bojectify-reveal-easing: ease-out;
 }
 ```
 

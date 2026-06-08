@@ -1,15 +1,15 @@
-# @boject
+# @bojectify
 
 Open source React component library monorepo, managed by [Nx](https://nx.dev) with pnpm.
 
 ## Packages
 
-| Package                                                   | Description                                                | RSC-Compatible |
-| --------------------------------------------------------- | ---------------------------------------------------------- | -------------- |
-| [`@boject/react-store`](packages/react-store)             | useReducer + Context with Vuex-style computed getters      | No (client)    |
-| [`@boject/react-store-async`](packages/react-store-async) | Async fetch helpers (REQUEST/SUCCESS/ERROR)                | No (client)    |
-| [`@boject/react-reveal`](packages/react-reveal)           | CSS animation wrapper (fade + slide)                       | Yes            |
-| [`@boject/react-carousel`](packages/react-carousel)       | CSS-only scroll-snap carousel with progressive enhancement | Yes            |
+| Package                                                      | Description                                                | RSC-Compatible |
+| ------------------------------------------------------------ | ---------------------------------------------------------- | -------------- |
+| [`@bojectify/react-store`](packages/react-store)             | useReducer + Context with Vuex-style computed getters      | No (client)    |
+| [`@bojectify/react-store-async`](packages/react-store-async) | Async fetch helpers (REQUEST/SUCCESS/ERROR)                | No (client)    |
+| [`@bojectify/react-reveal`](packages/react-reveal)           | CSS animation wrapper (fade + slide)                       | Yes            |
+| [`@bojectify/react-carousel`](packages/react-carousel)       | CSS-only scroll-snap carousel with progressive enhancement | Yes            |
 
 ## Getting Started
 
@@ -42,8 +42,8 @@ pnpm nx run-many -t lint test build typecheck
 Visual development for component packages:
 
 ```bash
-pnpm nx storybook @boject/react-carousel
-pnpm nx storybook @boject/react-reveal
+pnpm nx storybook @bojectify/react-carousel
+pnpm nx storybook @bojectify/react-reveal
 ```
 
 ### Storybook Tests
@@ -51,7 +51,7 @@ pnpm nx storybook @boject/react-reveal
 Stories with `play` functions run as browser tests in headless Chromium:
 
 ```bash
-pnpm nx test-storybook @boject/react-carousel
+pnpm nx test-storybook @bojectify/react-carousel
 pnpm nx run-many -t test-storybook
 ```
 
@@ -60,9 +60,9 @@ These also run automatically as part of `pnpm nx run-many -t test`.
 ### Working on a single package
 
 ```bash
-pnpm nx build @boject/react-store
-pnpm nx test @boject/react-reveal
-pnpm nx lint @boject/react-carousel
+pnpm nx build @bojectify/react-store
+pnpm nx test @bojectify/react-reveal
+pnpm nx lint @bojectify/react-carousel
 ```
 
 ### Affected commands
@@ -78,10 +78,10 @@ pnpm nx affected -t build
 
 ```
 packages/
-  react-store/        @boject/react-store         — State management with computed getters
-  react-store-async/  @boject/react-store-async   — Async fetch action helpers
-  react-reveal/       @boject/react-reveal        — CSS animation wrapper
-  react-carousel/     @boject/react-carousel      — CSS-only scroll-snap carousel
+  react-store/        @bojectify/react-store         — State management with computed getters
+  react-store-async/  @bojectify/react-store-async   — Async fetch action helpers
+  react-reveal/       @bojectify/react-reveal        — CSS animation wrapper
+  react-carousel/     @bojectify/react-carousel      — CSS-only scroll-snap carousel
 ```
 
 ### Module Boundaries
@@ -107,8 +107,8 @@ packages/
 For server-side rendered apps (Next.js, Remix, etc.), import the styles in your root layout:
 
 ```tsx
-import '@boject/react-reveal/styles.css';
-import '@boject/react-carousel/styles.css';
+import '@bojectify/react-reveal/styles.css';
+import '@bojectify/react-carousel/styles.css';
 ```
 
 This ensures CSS is available during SSR and prevents flash of unstyled content.
@@ -144,13 +144,13 @@ done
 **In another project** — install from the local registry:
 
 ```bash
-pnpm add @boject/react-carousel --registry http://localhost:4873
+pnpm add @bojectify/react-carousel --registry http://localhost:4873
 ```
 
 To republish the same version, delete the package from local storage first:
 
 ```bash
-rm -rf tmp/local-registry/storage/@boject/react-carousel
+rm -rf tmp/local-registry/storage/@bojectify/react-carousel
 ```
 
 ## License

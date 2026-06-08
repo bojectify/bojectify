@@ -3,7 +3,7 @@ import { Slide } from './Slide.js';
 import './Carousel.css';
 
 const toVar = (prop: string) =>
-  `--boject-carousel-${prop.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}`;
+  `--bojectify-carousel-${prop.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}`;
 
 function CarouselRoot({
   children,
@@ -45,7 +45,7 @@ function CarouselRoot({
   style,
   ...rest
 }: CarouselProps) {
-  const classes = ['boject-carousel', className].filter(Boolean).join(' ');
+  const classes = ['bojectify-carousel', className].filter(Boolean).join(' ');
 
   const props: Record<string, string | undefined> = {
     gap,

@@ -1,6 +1,6 @@
 ---
 name: link-workspace-packages
-description: 'Link workspace packages in monorepos (npm, yarn, pnpm, bun). USE WHEN: (1) you just created or generated new packages and need to wire up their dependencies, (2) user imports from a sibling package and needs to add it as a dependency, (3) you get resolution errors for workspace packages (@boject/*) like "cannot find module", "failed to resolve import", "TS2307", or "cannot resolve". DO NOT patch around with tsconfig paths or manual package.json edits - use the package manager''s workspace commands to fix actual linking.'
+description: 'Link workspace packages in monorepos (npm, yarn, pnpm, bun). USE WHEN: (1) you just created or generated new packages and need to wire up their dependencies, (2) user imports from a sibling package and needs to add it as a dependency, (3) you get resolution errors for workspace packages (@bojectify/*) like "cannot find module", "failed to resolve import", "TS2307", or "cannot resolve". DO NOT patch around with tsconfig paths or manual package.json edits - use the package manager''s workspace commands to fix actual linking.'
 ---
 
 # Link Workspace Packages
@@ -33,16 +33,16 @@ Uses `workspace:` protocol - symlinks only created when explicitly declared.
 
 ```bash
 # From consumer directory
-pnpm add @boject/ui --workspace
+pnpm add @bojectify/ui --workspace
 
 # Or with --filter from anywhere
-pnpm add @boject/ui --filter @boject/app --workspace
+pnpm add @bojectify/ui --filter @bojectify/app --workspace
 ```
 
 Result in `package.json`:
 
 ```json
-{ "dependencies": { "@boject/ui": "workspace:*" } }
+{ "dependencies": { "@bojectify/ui": "workspace:*" } }
 ```
 
 ---
@@ -52,13 +52,13 @@ Result in `package.json`:
 Also uses `workspace:` protocol.
 
 ```bash
-yarn workspace @boject/app add @boject/ui
+yarn workspace @bojectify/app add @bojectify/ui
 ```
 
 Result in `package.json`:
 
 ```json
-{ "dependencies": { "@boject/ui": "workspace:^" } }
+{ "dependencies": { "@bojectify/ui": "workspace:^" } }
 ```
 
 ---
@@ -68,13 +68,13 @@ Result in `package.json`:
 No `workspace:` protocol. npm auto-symlinks workspace packages.
 
 ```bash
-npm install @boject/ui --workspace @boject/app
+npm install @bojectify/ui --workspace @bojectify/app
 ```
 
 Result in `package.json`:
 
 ```json
-{ "dependencies": { "@boject/ui": "*" } }
+{ "dependencies": { "@bojectify/ui": "*" } }
 ```
 
 npm resolves to local workspace automatically during install.
@@ -86,13 +86,13 @@ npm resolves to local workspace automatically during install.
 Supports `workspace:` protocol (pnpm-compatible).
 
 ```bash
-cd packages/app && bun add @boject/ui
+cd packages/app && bun add @bojectify/ui
 ```
 
 Result in `package.json`:
 
 ```json
-{ "dependencies": { "@boject/ui": "workspace:*" } }
+{ "dependencies": { "@bojectify/ui": "workspace:*" } }
 ```
 
 ---
@@ -102,13 +102,13 @@ Result in `package.json`:
 **Example 1: pnpm - link ui lib to app**
 
 ```bash
-pnpm add @boject/ui --filter @boject/app --workspace
+pnpm add @bojectify/ui --filter @bojectify/app --workspace
 ```
 
 **Example 2: npm - link multiple packages**
 
 ```bash
-npm install @boject/data-access @boject/ui --workspace @boject/dashboard
+npm install @bojectify/data-access @bojectify/ui --workspace @bojectify/dashboard
 ```
 
 **Example 3: Debug "Cannot find module"**
@@ -119,7 +119,7 @@ npm install @boject/data-access @boject/ui --workspace @boject/dashboard
 
 ## Notes
 
-- Symlinks appear in `<consumer>/node_modules/@boject/<package>`
+- Symlinks appear in `<consumer>/node_modules/@bojectify/<package>`
 - **Hoisting differs by manager:**
   - npm/bun: hoist shared deps to root `node_modules`
   - pnpm: no hoisting (strict isolation, prevents phantom deps)

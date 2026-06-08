@@ -1,151 +1,151 @@
-.boject-carousel {
-  --boject-carousel-gap: 16px;
-  --boject-carousel-slide-width: 100%;
-  --boject-carousel-snap-align: start;
-  --boject-carousel-button-size: 1rem;
-  --boject-carousel-button-color: light-dark(#2563eb, #fff);
-  --boject-carousel-indicator-size: 12px;
-  --boject-carousel-indicator-color: light-dark(#767676, #8a8a8a);
-  --boject-carousel-indicator-active-color: light-dark(#2563eb, #ddd);
-  --boject-carousel-indicator-gap: 12px;
-  --boject-carousel-indicator-padding-block: 24px;
-  --boject-carousel-scroll-button-opacity-enabled: 0.9;
-  --boject-carousel-scroll-button-opacity-hover: 1;
-  --boject-carousel-scroll-button-opacity-focus: 1;
-  --boject-carousel-scroll-button-opacity-disabled: 0.5;
-  --boject-carousel-scroll-button-inset: 16px;
+.bojectify-carousel {
+  --bojectify-carousel-gap: 16px;
+  --bojectify-carousel-slide-width: 100%;
+  --bojectify-carousel-snap-align: start;
+  --bojectify-carousel-button-size: 1rem;
+  --bojectify-carousel-button-color: light-dark(#2563eb, #fff);
+  --bojectify-carousel-indicator-size: 12px;
+  --bojectify-carousel-indicator-color: light-dark(#767676, #8a8a8a);
+  --bojectify-carousel-indicator-active-color: light-dark(#2563eb, #ddd);
+  --bojectify-carousel-indicator-gap: 12px;
+  --bojectify-carousel-indicator-padding-block: 24px;
+  --bojectify-carousel-scroll-button-opacity-enabled: 0.9;
+  --bojectify-carousel-scroll-button-opacity-hover: 1;
+  --bojectify-carousel-scroll-button-opacity-focus: 1;
+  --bojectify-carousel-scroll-button-opacity-disabled: 0.5;
+  --bojectify-carousel-scroll-button-inset: 16px;
 
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  gap: var(--boject-carousel-gap);
+  gap: var(--bojectify-carousel-gap);
   -webkit-overflow-scrolling: touch;
   scrollbar-color: transparent transparent;
 }
 
-.boject-carousel:hover {
+.bojectify-carousel:hover {
   scrollbar-color: auto;
 }
 
-.boject-carousel:focus-visible {
+.bojectify-carousel:focus-visible {
   outline: 2px solid;
   outline-offset: 2px;
 }
 
-.boject-carousel__slide {
-  flex: 0 0 var(--boject-carousel-slide-width);
-  scroll-snap-align: var(--boject-carousel-snap-align);
+.bojectify-carousel__slide {
+  flex: 0 0 var(--bojectify-carousel-slide-width);
+  scroll-snap-align: var(--bojectify-carousel-snap-align);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .boject-carousel {
+  .bojectify-carousel {
     scroll-behavior: auto;
   }
 }
 
 /* Progressive enhancement — CSS scroll buttons and markers */
 @supports selector(::scroll-button(right)) {
-  .boject-carousel::-webkit-scrollbar {
+  .bojectify-carousel::-webkit-scrollbar {
     display: none;
   }
 
-  .boject-carousel {
+  .bojectify-carousel {
     scrollbar-width: none;
   }
 
-  .boject-carousel::scroll-button(*) {
-    font-size: var(--boject-carousel-button-size);
-    color: var(--boject-carousel-button-color);
-    opacity: var(--boject-carousel-scroll-button-opacity-enabled);
-    background: var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb));
-    border: var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff));
-    border-radius: var(--boject-carousel-scroll-button-border-radius, 50%);
-    width: var(--boject-carousel-scroll-button-width, 2.5rem);
-    height: var(--boject-carousel-scroll-button-height, 2.5rem);
-    padding: var(--boject-carousel-scroll-button-padding, 0.5rem);
+  .bojectify-carousel::scroll-button(*) {
+    font-size: var(--bojectify-carousel-button-size);
+    color: var(--bojectify-carousel-button-color);
+    opacity: var(--bojectify-carousel-scroll-button-opacity-enabled);
+    background: var(--bojectify-carousel-scroll-button-background, light-dark(#fff, #2563eb));
+    border: var(--bojectify-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff));
+    border-radius: var(--bojectify-carousel-scroll-button-border-radius, 50%);
+    width: var(--bojectify-carousel-scroll-button-width, 2.5rem);
+    height: var(--bojectify-carousel-scroll-button-height, 2.5rem);
+    padding: var(--bojectify-carousel-scroll-button-padding, 0.5rem);
     cursor: pointer;
   }
 
-  .boject-carousel::scroll-button(*):hover {
-    opacity: var(--boject-carousel-scroll-button-opacity-hover);
-    background: var(--boject-carousel-scroll-button-background-hover, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
-    border: var(--boject-carousel-scroll-button-border-hover, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
+  .bojectify-carousel::scroll-button(*):hover {
+    opacity: var(--bojectify-carousel-scroll-button-opacity-hover);
+    background: var(--bojectify-carousel-scroll-button-background-hover, var(--bojectify-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--bojectify-carousel-scroll-button-border-hover, var(--bojectify-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
   }
 
-  .boject-carousel::scroll-button(*):active {
-    background: var(--boject-carousel-scroll-button-background-active, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
-    border: var(--boject-carousel-scroll-button-border-active, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
+  .bojectify-carousel::scroll-button(*):active {
+    background: var(--bojectify-carousel-scroll-button-background-active, var(--bojectify-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--bojectify-carousel-scroll-button-border-active, var(--bojectify-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
   }
 
-  .boject-carousel::scroll-button(*):focus {
-    opacity: var(--boject-carousel-scroll-button-opacity-focus);
-    background: var(--boject-carousel-scroll-button-background-focus, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
-    border: var(--boject-carousel-scroll-button-border-focus, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
+  .bojectify-carousel::scroll-button(*):focus {
+    opacity: var(--bojectify-carousel-scroll-button-opacity-focus);
+    background: var(--bojectify-carousel-scroll-button-background-focus, var(--bojectify-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--bojectify-carousel-scroll-button-border-focus, var(--bojectify-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
   }
 
-  .boject-carousel::scroll-button(*):focus-visible {
+  .bojectify-carousel::scroll-button(*):focus-visible {
     outline: 2px solid;
     outline-offset: 2px;
   }
 
-  .boject-carousel::scroll-button(*):disabled {
-    opacity: var(--boject-carousel-scroll-button-opacity-disabled);
-    background: var(--boject-carousel-scroll-button-background-disabled, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
-    border: var(--boject-carousel-scroll-button-border-disabled, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
+  .bojectify-carousel::scroll-button(*):disabled {
+    opacity: var(--bojectify-carousel-scroll-button-opacity-disabled);
+    background: var(--bojectify-carousel-scroll-button-background-disabled, var(--bojectify-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--bojectify-carousel-scroll-button-border-disabled, var(--bojectify-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
     cursor: default;
   }
 
-  .boject-carousel {
-    anchor-name: --boject-carousel;
+  .bojectify-carousel {
+    anchor-name: --bojectify-carousel;
   }
 
-  .boject-carousel::scroll-button(left) {
-    content: var(--boject-carousel-scroll-button-prev-content, '\2039') / var(--boject-carousel-scroll-button-prev-label, 'Previous');
+  .bojectify-carousel::scroll-button(left) {
+    content: var(--bojectify-carousel-scroll-button-prev-content, '\2039') / var(--bojectify-carousel-scroll-button-prev-label, 'Previous');
     position: absolute;
-    position-anchor: --boject-carousel;
-    right: calc(anchor(left) - var(--boject-carousel-scroll-button-inset));
+    position-anchor: --bojectify-carousel;
+    right: calc(anchor(left) - var(--bojectify-carousel-scroll-button-inset));
     align-self: anchor-center;
   }
 
-  .boject-carousel::scroll-button(right) {
-    content: var(--boject-carousel-scroll-button-next-content, '\203A') / var(--boject-carousel-scroll-button-next-label, 'Next');
+  .bojectify-carousel::scroll-button(right) {
+    content: var(--bojectify-carousel-scroll-button-next-content, '\203A') / var(--bojectify-carousel-scroll-button-next-label, 'Next');
     position: absolute;
-    position-anchor: --boject-carousel;
-    left: calc(anchor(right) - var(--boject-carousel-scroll-button-inset));
+    position-anchor: --bojectify-carousel;
+    left: calc(anchor(right) - var(--bojectify-carousel-scroll-button-inset));
     align-self: anchor-center;
   }
 
-  .boject-carousel {
+  .bojectify-carousel {
     scroll-marker-group: after;
   }
 
-  .boject-carousel::scroll-marker-group {
+  .bojectify-carousel::scroll-marker-group {
     display: flex;
     justify-content: center;
-    gap: var(--boject-carousel-indicator-gap);
-    padding-block: var(--boject-carousel-indicator-padding-block);
+    gap: var(--bojectify-carousel-indicator-gap);
+    padding-block: var(--bojectify-carousel-indicator-padding-block);
   }
 
-  .boject-carousel > *::scroll-marker {
+  .bojectify-carousel > *::scroll-marker {
     content: '';
-    width: var(--boject-carousel-indicator-size);
-    height: var(--boject-carousel-indicator-size);
+    width: var(--bojectify-carousel-indicator-size);
+    height: var(--bojectify-carousel-indicator-size);
     border-radius: 50%;
-    background-color: var(--boject-carousel-indicator-color);
+    background-color: var(--bojectify-carousel-indicator-color);
     border: 0;
     cursor: pointer;
   }
 
-  .boject-carousel > *::scroll-marker:target-current {
-    background-color: var(--boject-carousel-indicator-active-color);
+  .bojectify-carousel > *::scroll-marker:target-current {
+    background-color: var(--bojectify-carousel-indicator-active-color);
     transform: scale(1.5);
   }
 
   /* Hide scroll buttons on touch-only devices — swipe is the natural gesture.
      Uses any-pointer: fine so hybrid devices (tablet + keyboard) keep buttons. */
   @media not (any-pointer: fine) {
-    .boject-carousel::scroll-button(*) {
+    .bojectify-carousel::scroll-button(*) {
       display: none;
     }
   }

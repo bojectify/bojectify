@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Transform the @boject Nx monorepo from demo scaffolding into four publishable React packages: react-reveal, react-carousel, react-store, react-store-async.
+**Goal:** Transform the @bojectify Nx monorepo from demo scaffolding into four publishable React packages: react-reveal, react-carousel, react-store, react-store-async.
 
-**Architecture:** Remove existing demo packages (strings, async, colors, utils). Add four new packages under `packages/`. Replace tsc builds with tsup. Component packages use plain CSS with `--boject-` prefixed classes imported internally. Store packages use `"use client"` for Next.js compatibility.
+**Architecture:** Remove existing demo packages (strings, async, colors, utils). Add four new packages under `packages/`. Replace tsc builds with tsup. Component packages use plain CSS with `--bojectify-` prefixed classes imported internally. Store packages use `"use client"` for Next.js compatibility.
 
 **Tech Stack:** Nx 22.x, pnpm, TypeScript, tsup, React 18+, Vitest, @testing-library/react, plain CSS
 
@@ -162,7 +162,7 @@ Also update the `release.projects` array to remove `"!utils"`:
 
 ```json
 "release": {
-  "projects": ["!@boject/source"],
+  "projects": ["!@bojectify/source"],
   "version": {
     "preVersionCommand": "npx nx run-many -t build"
   }
@@ -183,7 +183,7 @@ depConstraints: [],
 pnpm nx show projects
 ```
 
-Expected: only the root project `@boject/source` remains.
+Expected: only the root project `@bojectify/source` remains.
 
 - [ ] **Step 6: Commit**
 
@@ -231,7 +231,7 @@ Add `"jsx": "react-jsx"` to compilerOptions and add `"dom"` to the `lib` array:
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@boject/source"]
+    "customConditions": ["@bojectify/source"]
   }
 }
 ```
@@ -251,7 +251,7 @@ git commit -m "chore: add React, tsup, and testing-library dev dependencies"
 
 ---
 
-## Task 3: Create `@boject/react-store` package — types and factory
+## Task 3: Create `@bojectify/react-store` package — types and factory
 
 This is built first because `react-store-async` depends on it.
 
@@ -276,7 +276,7 @@ This is built first because `react-store-async` depends on it.
 
 ```json
 {
-  "name": "@boject/react-store",
+  "name": "@bojectify/react-store",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -285,7 +285,7 @@ This is built first because `react-store-async` depends on it.
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@boject/source": "./src/index.ts",
+      "@bojectify/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
@@ -410,7 +410,7 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/react-store',
   plugins: [],
   test: {
-    name: '@boject/react-store',
+    name: '@bojectify/react-store',
     watch: false,
     globals: true,
     environment: 'jsdom',
@@ -799,12 +799,12 @@ Expected: both pass.
 
 ```bash
 git add -A
-git commit -m "feat: add @boject/react-store package with createStore factory and Proxy-based getters"
+git commit -m "feat: add @bojectify/react-store package with createStore factory and Proxy-based getters"
 ```
 
 ---
 
-## Task 4: Create `@boject/react-store-async` package
+## Task 4: Create `@bojectify/react-store-async` package
 
 **Files:**
 
@@ -828,7 +828,7 @@ git commit -m "feat: add @boject/react-store package with createStore factory an
 
 ```json
 {
-  "name": "@boject/react-store-async",
+  "name": "@bojectify/react-store-async",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -837,7 +837,7 @@ git commit -m "feat: add @boject/react-store package with createStore factory an
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@boject/source": "./src/index.ts",
+      "@bojectify/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
@@ -846,11 +846,11 @@ git commit -m "feat: add @boject/react-store package with createStore factory an
   "files": ["dist", "!**/*.tsbuildinfo"],
   "peerDependencies": {
     "react": ">=18.0.0",
-    "@boject/react-store": ">=0.0.1"
+    "@bojectify/react-store": ">=0.0.1"
   },
   "devDependencies": {
     "vite": "^7.0.0",
-    "@boject/react-store": "workspace:*"
+    "@bojectify/react-store": "workspace:*"
   },
   "sideEffects": false,
   "nx": {
@@ -951,7 +951,7 @@ export default defineConfig({
   format: ['esm'],
   dts: true,
   clean: true,
-  external: ['react', 'react-dom', '@boject/react-store'],
+  external: ['react', 'react-dom', '@bojectify/react-store'],
 });
 ```
 
@@ -965,7 +965,7 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/react-store-async',
   plugins: [],
   test: {
-    name: '@boject/react-store-async',
+    name: '@bojectify/react-store-async',
     watch: false,
     globals: true,
     environment: 'node',
@@ -1356,12 +1356,12 @@ Expected: all pass.
 
 ```bash
 git add -A
-git commit -m "feat: add @boject/react-store-async package with createFetchAction and asyncReducer"
+git commit -m "feat: add @bojectify/react-store-async package with createFetchAction and asyncReducer"
 ```
 
 ---
 
-## Task 5: Create `@boject/react-reveal` package
+## Task 5: Create `@bojectify/react-reveal` package
 
 **Files:**
 
@@ -1384,7 +1384,7 @@ git commit -m "feat: add @boject/react-store-async package with createFetchActio
 
 ```json
 {
-  "name": "@boject/react-reveal",
+  "name": "@bojectify/react-reveal",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -1393,7 +1393,7 @@ git commit -m "feat: add @boject/react-store-async package with createFetchActio
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@boject/source": "./src/index.ts",
+      "@bojectify/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
@@ -1518,7 +1518,7 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/react-reveal',
   plugins: [],
   test: {
-    name: '@boject/react-reveal',
+    name: '@bojectify/react-reveal',
     watch: false,
     globals: true,
     environment: 'jsdom',
@@ -1568,25 +1568,25 @@ export type RevealProps = {
 - [ ] **Step 9: Write the CSS — `packages/react-reveal/src/styles.css`**
 
 ```css
-.boject-reveal {
-  --boject-reveal-duration: 800ms;
-  --boject-reveal-delay: 0ms;
-  --boject-reveal-distance: 36px;
-  --boject-reveal-easing: ease-out;
+.bojectify-reveal {
+  --bojectify-reveal-duration: 800ms;
+  --bojectify-reveal-delay: 0ms;
+  --bojectify-reveal-distance: 36px;
+  --bojectify-reveal-easing: ease-out;
 }
 
-.boject-reveal--fade {
+.bojectify-reveal--fade {
   opacity: 0;
-  animation: boject-reveal-fade-in var(--boject-reveal-duration)
-    var(--boject-reveal-easing) var(--boject-reveal-delay) forwards;
+  animation: bojectify-reveal-fade-in var(--bojectify-reveal-duration)
+    var(--bojectify-reveal-easing) var(--bojectify-reveal-delay) forwards;
 }
 
-.boject-reveal--slide {
-  animation: boject-reveal-slide var(--boject-reveal-duration)
-    var(--boject-reveal-easing) var(--boject-reveal-delay) forwards;
+.bojectify-reveal--slide {
+  animation: bojectify-reveal-slide var(--bojectify-reveal-duration)
+    var(--bojectify-reveal-easing) var(--bojectify-reveal-delay) forwards;
 }
 
-@keyframes boject-reveal-fade-in {
+@keyframes bojectify-reveal-fade-in {
   0% {
     opacity: 0;
   }
@@ -1595,7 +1595,7 @@ export type RevealProps = {
   }
 }
 
-@keyframes boject-reveal-slide {
+@keyframes bojectify-reveal-slide {
   100% {
     transform: translate(0);
   }
@@ -1637,7 +1637,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain('boject-reveal--fade');
+    expect(el.className).toContain('bojectify-reveal--fade');
   });
 
   it('does not apply fade class when fadeIn is false', () => {
@@ -1647,7 +1647,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).not.toContain('boject-reveal--fade');
+    expect(el.className).not.toContain('bojectify-reveal--fade');
   });
 
   it('applies slide class when distance is non-zero', () => {
@@ -1657,7 +1657,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain('boject-reveal--slide');
+    expect(el.className).toContain('bojectify-reveal--slide');
   });
 
   it('does not apply slide class when distance is 0', () => {
@@ -1667,7 +1667,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).not.toContain('boject-reveal--slide');
+    expect(el.className).not.toContain('bojectify-reveal--slide');
   });
 
   it('sets CSS custom properties from props', () => {
@@ -1677,9 +1677,13 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.style.getPropertyValue('--boject-reveal-duration')).toBe('400ms');
-    expect(el.style.getPropertyValue('--boject-reveal-delay')).toBe('100ms');
-    expect(el.style.getPropertyValue('--boject-reveal-distance')).toBe('50px');
+    expect(el.style.getPropertyValue('--bojectify-reveal-duration')).toBe(
+      '400ms'
+    );
+    expect(el.style.getPropertyValue('--bojectify-reveal-delay')).toBe('100ms');
+    expect(el.style.getPropertyValue('--bojectify-reveal-distance')).toBe(
+      '50px'
+    );
   });
 
   it('sets correct transform for each direction', () => {
@@ -1727,7 +1731,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain('boject-reveal');
+    expect(el.className).toContain('bojectify-reveal');
     expect(el.className).toContain('custom');
   });
 
@@ -1780,18 +1784,18 @@ export function Reveal({
   const hasSlide = distance !== '0' && distance !== '0px';
 
   const classes = [
-    'boject-reveal',
-    fadeIn && 'boject-reveal--fade',
-    hasSlide && 'boject-reveal--slide',
+    'bojectify-reveal',
+    fadeIn && 'bojectify-reveal--fade',
+    hasSlide && 'bojectify-reveal--slide',
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
   const combinedStyle = {
-    '--boject-reveal-duration': `${duration}ms`,
-    '--boject-reveal-delay': `${delay}ms`,
-    '--boject-reveal-distance': distance,
+    '--bojectify-reveal-duration': `${duration}ms`,
+    '--bojectify-reveal-delay': `${delay}ms`,
+    '--bojectify-reveal-distance': distance,
     ...(hasSlide ? { transform: directionMap[direction](distance) } : {}),
     ...style,
   };
@@ -1862,12 +1866,12 @@ Expected: all pass. Verify `packages/react-reveal/dist/styles.css` exists.
 
 ```bash
 git add -A
-git commit -m "feat: add @boject/react-reveal package — CSS animation wrapper component"
+git commit -m "feat: add @bojectify/react-reveal package — CSS animation wrapper component"
 ```
 
 ---
 
-## Task 6: Create `@boject/react-carousel` package
+## Task 6: Create `@bojectify/react-carousel` package
 
 **Files:**
 
@@ -1891,7 +1895,7 @@ git commit -m "feat: add @boject/react-reveal package — CSS animation wrapper 
 
 ```json
 {
-  "name": "@boject/react-carousel",
+  "name": "@bojectify/react-carousel",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -1900,7 +1904,7 @@ git commit -m "feat: add @boject/react-reveal package — CSS animation wrapper 
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@boject/source": "./src/index.ts",
+      "@bojectify/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
@@ -2027,7 +2031,7 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/react-carousel',
   plugins: [],
   test: {
-    name: '@boject/react-carousel',
+    name: '@bojectify/react-carousel',
     watch: false,
     globals: true,
     environment: 'jsdom',
@@ -2075,88 +2079,88 @@ export type SlideProps = {
 - [ ] **Step 7: Write the CSS — `packages/react-carousel/src/styles.css`**
 
 ```css
-.boject-carousel {
-  --boject-carousel-gap: 16px;
-  --boject-carousel-slide-width: 100%;
-  --boject-carousel-snap-align: start;
-  --boject-carousel-button-size: 2rem;
-  --boject-carousel-button-color: currentColor;
-  --boject-carousel-indicator-size: 8px;
-  --boject-carousel-indicator-color: #ccc;
-  --boject-carousel-indicator-active-color: #333;
+.bojectify-carousel {
+  --bojectify-carousel-gap: 16px;
+  --bojectify-carousel-slide-width: 100%;
+  --bojectify-carousel-snap-align: start;
+  --bojectify-carousel-button-size: 2rem;
+  --bojectify-carousel-button-color: currentColor;
+  --bojectify-carousel-indicator-size: 8px;
+  --bojectify-carousel-indicator-color: #ccc;
+  --bojectify-carousel-indicator-active-color: #333;
 
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  gap: var(--boject-carousel-gap);
+  gap: var(--bojectify-carousel-gap);
   -webkit-overflow-scrolling: touch;
 }
 
-.boject-carousel::-webkit-scrollbar {
+.bojectify-carousel::-webkit-scrollbar {
   display: none;
 }
 
-.boject-carousel {
+.bojectify-carousel {
   scrollbar-width: none;
 }
 
-.boject-carousel__slide {
-  flex: 0 0 var(--boject-carousel-slide-width);
-  scroll-snap-align: var(--boject-carousel-snap-align);
+.bojectify-carousel__slide {
+  flex: 0 0 var(--bojectify-carousel-slide-width);
+  scroll-snap-align: var(--bojectify-carousel-snap-align);
 }
 
 /* Progressive enhancement — CSS scroll buttons and markers */
 @supports selector(::scroll-button(right)) {
-  .boject-carousel::scroll-button(*) {
+  .bojectify-carousel::scroll-button(*) {
     border: 0;
-    font-size: var(--boject-carousel-button-size);
+    font-size: var(--bojectify-carousel-button-size);
     background: none;
-    color: var(--boject-carousel-button-color);
+    color: var(--bojectify-carousel-button-color);
     opacity: 0.7;
     cursor: pointer;
   }
 
-  .boject-carousel::scroll-button(*):hover,
-  .boject-carousel::scroll-button(*):focus {
+  .bojectify-carousel::scroll-button(*):hover,
+  .bojectify-carousel::scroll-button(*):focus {
     opacity: 1;
   }
 
-  .boject-carousel::scroll-button(*):disabled {
+  .bojectify-carousel::scroll-button(*):disabled {
     opacity: 0.2;
     cursor: default;
   }
 
-  .boject-carousel::scroll-button(left) {
+  .bojectify-carousel::scroll-button(left) {
     content: '\25C0' / 'Previous';
   }
 
-  .boject-carousel::scroll-button(right) {
+  .bojectify-carousel::scroll-button(right) {
     content: '\25B6' / 'Next';
   }
 
-  .boject-carousel {
+  .bojectify-carousel {
     scroll-marker-group: after;
   }
 
-  .boject-carousel::scroll-marker-group {
+  .bojectify-carousel::scroll-marker-group {
     display: flex;
     justify-content: center;
     gap: 8px;
     padding-block: 8px;
   }
 
-  .boject-carousel > *::scroll-marker {
+  .bojectify-carousel > *::scroll-marker {
     content: '';
-    width: var(--boject-carousel-indicator-size);
-    height: var(--boject-carousel-indicator-size);
+    width: var(--bojectify-carousel-indicator-size);
+    height: var(--bojectify-carousel-indicator-size);
     border-radius: 50%;
-    background-color: var(--boject-carousel-indicator-color);
+    background-color: var(--bojectify-carousel-indicator-color);
     border: 0;
     cursor: pointer;
   }
 
-  .boject-carousel > *::scroll-marker:target-current {
-    background-color: var(--boject-carousel-indicator-active-color);
+  .bojectify-carousel > *::scroll-marker:target-current {
+    background-color: var(--bojectify-carousel-indicator-active-color);
   }
 }
 ```
@@ -2186,7 +2190,7 @@ describe('Carousel', () => {
       </Carousel>
     );
     const el = screen.getByTestId('carousel');
-    expect(el.className).toContain('boject-carousel');
+    expect(el.className).toContain('bojectify-carousel');
   });
 
   it('applies slide class to slides', () => {
@@ -2196,7 +2200,7 @@ describe('Carousel', () => {
       </Carousel>
     );
     const el = screen.getByTestId('slide');
-    expect(el.className).toContain('boject-carousel__slide');
+    expect(el.className).toContain('bojectify-carousel__slide');
   });
 
   it('sets accessibility attributes on container', () => {
@@ -2240,7 +2244,7 @@ describe('Carousel', () => {
       </Carousel>
     );
     const el = screen.getByTestId('carousel');
-    expect(el.className).toContain('boject-carousel');
+    expect(el.className).toContain('bojectify-carousel');
     expect(el.className).toContain('custom');
   });
 
@@ -2253,7 +2257,7 @@ describe('Carousel', () => {
       </Carousel>
     );
     const el = screen.getByTestId('slide');
-    expect(el.className).toContain('boject-carousel__slide');
+    expect(el.className).toContain('bojectify-carousel__slide');
     expect(el.className).toContain('custom-slide');
   });
 
@@ -2285,7 +2289,7 @@ Expected: FAIL — `Carousel` module does not exist yet.
 import type { SlideProps } from './Carousel.types.js';
 
 export function Slide({ children, className, ...rest }: SlideProps) {
-  const classes = ['boject-carousel__slide', className]
+  const classes = ['bojectify-carousel__slide', className]
     .filter(Boolean)
     .join(' ');
 
@@ -2315,7 +2319,7 @@ function CarouselRoot({
   className,
   ...rest
 }: CarouselProps) {
-  const classes = ['boject-carousel', className].filter(Boolean).join(' ');
+  const classes = ['bojectify-carousel', className].filter(Boolean).join(' ');
 
   return (
     <div
@@ -2388,7 +2392,7 @@ Expected: all pass. Verify `packages/react-carousel/dist/styles.css` exists.
 
 ```bash
 git add -A
-git commit -m "feat: add @boject/react-carousel package — CSS-only scroll-snap carousel with progressive enhancement"
+git commit -m "feat: add @bojectify/react-carousel package — CSS-only scroll-snap carousel with progressive enhancement"
 ```
 
 ---
@@ -2493,10 +2497,10 @@ pnpm nx release publish --registry=http://localhost:4873
 - [ ] **Step 3: Verify packages are available**
 
 ```bash
-npm view @boject/react-reveal --registry=http://localhost:4873
-npm view @boject/react-carousel --registry=http://localhost:4873
-npm view @boject/react-store --registry=http://localhost:4873
-npm view @boject/react-store-async --registry=http://localhost:4873
+npm view @bojectify/react-reveal --registry=http://localhost:4873
+npm view @bojectify/react-carousel --registry=http://localhost:4873
+npm view @bojectify/react-store --registry=http://localhost:4873
+npm view @bojectify/react-store-async --registry=http://localhost:4873
 ```
 
 Expected: all 4 packages show version 0.0.1.

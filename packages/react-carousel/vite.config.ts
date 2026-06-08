@@ -12,7 +12,7 @@ export default defineConfig(() => ({
       {
         extends: true as const,
         test: {
-          name: '@boject/react-carousel',
+          name: '@bojectify/react-carousel',
           watch: false,
           globals: true,
           environment: 'jsdom',

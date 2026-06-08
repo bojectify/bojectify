@@ -1,9 +1,9 @@
-# @boject/react-carousel
+# @bojectify/react-carousel
 
-[![CI](https://github.com/bojectify/boject/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/boject/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/@boject/react-carousel)](https://www.npmjs.com/package/@boject/react-carousel)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@boject/react-carousel)](https://bundlephobia.com/package/@boject/react-carousel)
-[![License](https://img.shields.io/npm/l/@boject/react-carousel)](https://github.com/bojectify/boject/blob/main/LICENSE)
+[![CI](https://github.com/bojectify/bojectify/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/bojectify/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@bojectify/react-carousel)](https://www.npmjs.com/package/@bojectify/react-carousel)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@bojectify/react-carousel)](https://bundlephobia.com/package/@bojectify/react-carousel)
+[![License](https://img.shields.io/npm/l/@bojectify/react-carousel)](https://github.com/bojectify/bojectify/blob/main/LICENSE)
 
 CSS-only scroll-snap carousel for React. No JavaScript scroll handlers — just native browser scrolling with CSS scroll-snap. All slides are in the DOM and fully indexable by search engines.
 
@@ -12,14 +12,14 @@ RSC-compatible. No `"use client"` directive required.
 ## Install
 
 ```bash
-npm install @boject/react-carousel react
+npm install @bojectify/react-carousel react
 ```
 
 ## Usage
 
 ```tsx
-import { Carousel } from '@boject/react-carousel';
-import '@boject/react-carousel/styles.css';
+import { Carousel } from '@bojectify/react-carousel';
+import '@bojectify/react-carousel/styles.css';
 
 <Carousel>
   <Carousel.Slide>First slide</Carousel.Slide>
@@ -126,11 +126,13 @@ Props are the recommended way to customise the carousel. For advanced use cases 
 
 ```css
 .responsive-carousel {
-  --boject-carousel-slide-width: 100%;
+  --bojectify-carousel-slide-width: 100%;
 }
 @media (min-width: 640px) {
   .responsive-carousel {
-    --boject-carousel-slide-width: calc(50% - var(--boject-carousel-gap) / 2);
+    --bojectify-carousel-slide-width: calc(
+      50% - var(--bojectify-carousel-gap) / 2
+    );
   }
 }
 ```

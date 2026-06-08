@@ -2,18 +2,18 @@
 
 ## Overview
 
-Evolve the `@boject` Nx monorepo from Nx demo scaffolding into a community-facing open source collection of React packages published to NPM. Single public GitHub repo.
+Evolve the `@bojectify` Nx monorepo from Nx demo scaffolding into a community-facing open source collection of React packages published to NPM. Single public GitHub repo.
 
 ## Packages
 
 Remove existing demo packages (`strings`, `async`, `colors`, `utils`). Add four new packages:
 
-| Package             | NPM Name                    | Description                                 | RSC-Compatible            |
-| ------------------- | --------------------------- | ------------------------------------------- | ------------------------- |
-| `react-reveal`      | `@boject/react-reveal`      | CSS animation wrapper                       | Yes                       |
-| `react-carousel`    | `@boject/react-carousel`    | CSS-only scroll-snap carousel               | Yes                       |
-| `react-store`       | `@boject/react-store`       | useReducer + Context with computed getters  | No (ships `"use client"`) |
-| `react-store-async` | `@boject/react-store-async` | Async fetch helpers (REQUEST/SUCCESS/ERROR) | No (ships `"use client"`) |
+| Package             | NPM Name                       | Description                                 | RSC-Compatible            |
+| ------------------- | ------------------------------ | ------------------------------------------- | ------------------------- |
+| `react-reveal`      | `@bojectify/react-reveal`      | CSS animation wrapper                       | Yes                       |
+| `react-carousel`    | `@bojectify/react-carousel`    | CSS-only scroll-snap carousel               | Yes                       |
+| `react-store`       | `@bojectify/react-store`       | useReducer + Context with computed getters  | No (ships `"use client"`) |
+| `react-store-async` | `@bojectify/react-store-async` | Async fetch helpers (REQUEST/SUCCESS/ERROR) | No (ships `"use client"`) |
 
 ```
 packages/
@@ -68,7 +68,7 @@ For non-CSS packages (react-store, react-store-async):
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@boject/source": "./src/index.ts",
+      "@bojectify/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
@@ -85,7 +85,7 @@ For CSS-bearing packages (react-reveal, react-carousel):
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@boject/source": "./src/index.ts",
+      "@bojectify/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
@@ -99,7 +99,7 @@ The `sideEffects` array tells bundlers to preserve the CSS import (which the com
 
 ## Package Designs
 
-### @boject/react-reveal
+### @bojectify/react-reveal
 
 Ported from existing component at `/Users/ollyharkness/Sites/boject-pixi/src/components/ui/layout/reveal`.
 
@@ -126,22 +126,22 @@ Ported from existing component at `/Users/ollyharkness/Sites/boject-pixi/src/com
 **CSS tokens:**
 
 ```css
---boject-reveal-duration: 800ms;
---boject-reveal-delay: 0ms;
---boject-reveal-distance: 36px;
---boject-reveal-easing: ease-out;
+--bojectify-reveal-duration: 800ms;
+--bojectify-reveal-delay: 0ms;
+--bojectify-reveal-distance: 36px;
+--bojectify-reveal-easing: ease-out;
 ```
 
 Props set these inline and take precedence. Consumers can override via CSS for theming/global changes.
 
-### @boject/react-carousel
+### @bojectify/react-carousel
 
 CSS-only, SEO-friendly. All slides render as semantic HTML visible to crawlers.
 
 **API (compound component pattern):**
 
 ```tsx
-import { Carousel } from '@boject/react-carousel';
+import { Carousel } from '@bojectify/react-carousel';
 
 <Carousel>
   <Carousel.Slide>First slide</Carousel.Slide>
@@ -186,27 +186,27 @@ These are experimental CSS features (CSS Overflow Module). The carousel works fu
 
 ```css
 /* Base — works everywhere */
-.boject-carousel {
+.bojectify-carousel {
   scroll-snap-type: x mandatory;
   overflow-x: auto;
 }
 
 /* Enhanced — where supported */
 @supports selector(::scroll-button(right)) {
-  .boject-carousel::scroll-button(left) {
+  .bojectify-carousel::scroll-button(left) {
     content: '' / 'Previous';
   }
-  .boject-carousel::scroll-button(right) {
+  .bojectify-carousel::scroll-button(right) {
     content: '' / 'Next';
   }
-  .boject-carousel {
+  .bojectify-carousel {
     scroll-marker-group: after;
   }
-  .boject-carousel > *::scroll-marker {
+  .bojectify-carousel > *::scroll-marker {
     content: '';
   }
-  .boject-carousel > *::scroll-marker:target-current {
-    background-color: var(--boject-carousel-indicator-active-color);
+  .bojectify-carousel > *::scroll-marker:target-current {
+    background-color: var(--bojectify-carousel-indicator-active-color);
   }
 }
 ```
@@ -216,24 +216,24 @@ These are experimental CSS features (CSS Overflow Module). The carousel works fu
 **CSS tokens:**
 
 ```css
---boject-carousel-gap: 16px;
---boject-carousel-slide-width: 100%;
---boject-carousel-snap-align: start;
---boject-carousel-button-size: 2rem;
---boject-carousel-button-color: currentColor;
---boject-carousel-indicator-size: 8px;
---boject-carousel-indicator-color: #ccc;
---boject-carousel-indicator-active-color: #333;
+--bojectify-carousel-gap: 16px;
+--bojectify-carousel-slide-width: 100%;
+--bojectify-carousel-snap-align: start;
+--bojectify-carousel-button-size: 2rem;
+--bojectify-carousel-button-color: currentColor;
+--bojectify-carousel-indicator-size: 8px;
+--bojectify-carousel-indicator-color: #ccc;
+--bojectify-carousel-indicator-active-color: #333;
 ```
 
-### @boject/react-store
+### @bojectify/react-store
 
 A `createStore` factory that replaces manual `useReducer` + `createContext` + Provider boilerplate. Inspired by Vuex's getter pattern.
 
 **API:**
 
 ```ts
-import { createStore } from '@boject/react-store';
+import { createStore } from '@bojectify/react-store';
 
 const { Provider, useStore } = createStore({
   initialState: { count: 0, multiplier: 2 },
@@ -290,14 +290,14 @@ getters.multiplied; // number
 3. Getter resolution: Proxy-based lazy evaluation, each getter computed and cached on first access within a render
 4. Returns `{ state, actions, getters }` from the hook via Context
 
-### @boject/react-store-async
+### @bojectify/react-store-async
 
-Extends `@boject/react-store` with helpers for the REQUEST → SUCCESS → ERROR fetch pattern.
+Extends `@bojectify/react-store` with helpers for the REQUEST → SUCCESS → ERROR fetch pattern.
 
 **API:**
 
 ```ts
-import { createFetchAction, asyncReducer } from '@boject/react-store-async';
+import { createFetchAction, asyncReducer } from '@bojectify/react-store-async';
 
 const fetchUser = createFetchAction<UserState>('FETCH_USER');
 
@@ -346,7 +346,7 @@ Each `.reducers(stateKey)` returns `{ [FETCH_X_REQUEST]: fn, [FETCH_X_SUCCESS]: 
 
 - Uses native `fetch` — no axios dependency
 - `mutator` is optional — raw response stored if omitted
-- `@boject/react-store` is a `peerDependency` — consumers must install both packages. `react-store-async` imports types from `react-store` and its helpers produce objects (action types, reducer cases) that integrate with `createStore`
+- `@bojectify/react-store` is a `peerDependency` — consumers must install both packages. `react-store-async` imports types from `react-store` and its helpers produce objects (action types, reducer cases) that integrate with `createStore`
 - `createFetchAction(key)` generates `FETCH_{KEY}_REQUEST`, `FETCH_{KEY}_SUCCESS`, `FETCH_{KEY}_FAILURE` action types
 
 ## Nx Configuration
@@ -365,22 +365,22 @@ Each `.reducers(stateKey)` returns `{ [FETCH_X_REQUEST]: fn, [FETCH_X_SUCCESS]: 
 
 ## CSS Strategy
 
-**Approach:** Plain CSS (not CSS Modules) with `--boject-` prefixed class names to avoid collisions (e.g. `.boject-reveal`, `.boject-carousel__slide`). CSS custom properties provide the theming API.
+**Approach:** Plain CSS (not CSS Modules) with `--bojectify-` prefixed class names to avoid collisions (e.g. `.bojectify-reveal`, `.bojectify-carousel__slide`). CSS custom properties provide the theming API.
 
 **Distribution:** Each component imports its own CSS via a static import (`import './styles.css'`). tsup extracts the CSS to a separate `dist/styles.css` file and preserves the import reference in the output JS. The consumer's bundler (webpack, Vite, Next.js) resolves this at build time.
 
 Consumer usage — no separate CSS import needed:
 
 ```tsx
-import { Reveal } from '@boject/react-reveal';
+import { Reveal } from '@bojectify/react-reveal';
 // CSS is resolved automatically by the consumer's bundler
 ```
 
 **Why this works with RSC:** The `import './styles.css'` is a static/declarative import, not a runtime side effect. Frameworks like Next.js handle CSS imports at build time — extracting and injecting the CSS into the page. This is fundamentally different from `injectStyle` which creates `<style>` tags at runtime via JS.
 
-**Why not CSS Modules:** Adds build complexity (esbuild plugins) and the `--boject-` prefix already prevents class name collisions.
+**Why not CSS Modules:** Adds build complexity (esbuild plugins) and the `--bojectify-` prefix already prevents class name collisions.
 
-**CSS tokens:** All visual properties exposed as CSS custom properties with `--boject-` prefix. Props set CSS variables inline and take precedence over CSS overrides. Consumers can override tokens via CSS for theming or global changes.
+**CSS tokens:** All visual properties exposed as CSS custom properties with `--bojectify-` prefix. Props set CSS variables inline and take precedence over CSS overrides. Consumers can override tokens via CSS for theming or global changes.
 
 ## Verdaccio
 

@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-React component library monorepo (`@boject`) managed by Nx 22.x with pnpm. Contains 4 publishable NPM packages under `packages/`.
+React component library monorepo (`@bojectify`) managed by Nx 22.x with pnpm. Contains 4 publishable NPM packages under `packages/`.
 
-| Package                     | Tag                       | Description                                           |
-| --------------------------- | ------------------------- | ----------------------------------------------------- |
-| `@boject/react-store`       | `scope:react-store`       | useReducer + Context with Vuex-style computed getters |
-| `@boject/react-store-async` | `scope:react-store-async` | Async fetch helpers (REQUEST/SUCCESS/ERROR pattern)   |
-| `@boject/react-reveal`      | `scope:react-reveal`      | CSS animation wrapper (fade/slide, RSC-compatible)    |
-| `@boject/react-carousel`    | `scope:react-carousel`    | CSS-only scroll-snap carousel (RSC-compatible)        |
+| Package                        | Tag                       | Description                                           |
+| ------------------------------ | ------------------------- | ----------------------------------------------------- |
+| `@bojectify/react-store`       | `scope:react-store`       | useReducer + Context with Vuex-style computed getters |
+| `@bojectify/react-store-async` | `scope:react-store-async` | Async fetch helpers (REQUEST/SUCCESS/ERROR pattern)   |
+| `@bojectify/react-reveal`      | `scope:react-reveal`      | CSS animation wrapper (fade/slide, RSC-compatible)    |
+| `@bojectify/react-carousel`    | `scope:react-carousel`    | CSS-only scroll-snap carousel (RSC-compatible)        |
 
 ## Commands
 
@@ -19,13 +19,13 @@ Always use `pnpm nx` (never a global `nx` install). Never use `npx` — use `pnp
 
 ```bash
 # Build / Test / Lint / Typecheck a single project
-pnpm nx build @boject/react-store
-pnpm nx test @boject/react-reveal
-pnpm nx lint @boject/react-carousel
-pnpm nx typecheck @boject/react-store-async
+pnpm nx build @bojectify/react-store
+pnpm nx test @bojectify/react-reveal
+pnpm nx lint @bojectify/react-carousel
+pnpm nx typecheck @bojectify/react-store-async
 
 # Stylelint (react-carousel and react-reveal only)
-pnpm nx stylelint @boject/react-carousel
+pnpm nx stylelint @bojectify/react-carousel
 
 # Run across all projects
 pnpm nx run-many -t build
@@ -39,11 +39,11 @@ pnpm nx format:check
 pnpm nx format:write
 
 # Storybook (react-carousel and react-reveal only)
-pnpm nx storybook @boject/react-carousel
-pnpm nx storybook @boject/react-reveal
+pnpm nx storybook @bojectify/react-carousel
+pnpm nx storybook @bojectify/react-reveal
 
 # Storybook interaction tests (runs play functions in headless Chromium)
-pnpm nx test-storybook @boject/react-carousel
+pnpm nx test-storybook @bojectify/react-carousel
 pnpm nx run-many -t test-storybook
 
 # Release (dry run)
@@ -53,7 +53,7 @@ pnpm nx release --dry-run
 pnpm nx local-registry
 ```
 
-Nx project names include the scope (e.g. `@boject/react-store`). Verify with `pnpm nx show projects`.
+Nx project names include the scope (e.g. `@bojectify/react-store`). Verify with `pnpm nx show projects`.
 
 ## Architecture
 
@@ -77,18 +77,18 @@ Run `pnpm nx lint <project>` to verify.
 ### TypeScript Setup
 
 - **Project references** wired through root `tsconfig.json` → per-package `tsconfig.lib.json`
-- **Custom condition `@boject/source`** in `tsconfig.base.json` enables importing TypeScript source directly during development (no build step needed). Each package.json exports map includes `"@boject/source": "./src/index.ts"`.
+- **Custom condition `@bojectify/source`** in `tsconfig.base.json` enables importing TypeScript source directly during development (no build step needed). Each package.json exports map includes `"@bojectify/source": "./src/index.ts"`.
 - **JSX**: `react-jsx` (automatic runtime)
 - Build output goes to `packages/<name>/dist/`
 - Module: `nodenext`, Target: `es2022`, strict mode enabled
 
 ### CSS Strategy
 
-- Plain CSS (not CSS Modules) with `boject-` prefixed class names (BEM convention)
+- Plain CSS (not CSS Modules) with `bojectify-` prefixed class names (BEM convention)
 - **react-reveal**: Inline `opacity: 0` and `transform` set on the element for SSR (CSS animations override inline styles via `animation-fill-mode: forwards`)
 - **react-carousel**: Uses cutting-edge CSS features (`::scroll-button`, `::scroll-marker`, anchor positioning)
-- CSS custom properties provide theming API (e.g. `--boject-carousel-gap`). Carousel exposes these as typed React props (`<Carousel gap="32px" slideWidth="80%">`)
-- Both packages export `./styles.css` for SSR consumers: `import '@boject/react-reveal/styles.css'`
+- CSS custom properties provide theming API (e.g. `--bojectify-carousel-gap`). Carousel exposes these as typed React props (`<Carousel gap="32px" slideWidth="80%">`)
+- Both packages export `./styles.css` for SSR consumers: `import '@bojectify/react-reveal/styles.css'`
 - **Stylelint** enforces CSS standards via `stylelint-config-standard`
 
 ### Testing
@@ -113,7 +113,7 @@ Run `pnpm nx lint <project>` to verify.
 
 - All project configuration lives in each `package.json` under the `"nx"` field — there are no `project.json` files
 - Nx plugins (`@nx/js/typescript`, `@nx/vite/plugin`, `@nx/eslint/plugin`, `@nx/vitest`, `@nx/storybook/plugin`) infer targets automatically
-- Release excludes root package (configured in `nx.json` → `release.projects: ["!@boject/source"]`)
+- Release excludes root package (configured in `nx.json` → `release.projects: ["!@bojectify/source"]`)
 - `preserveMatchingDependencyRanges` is disabled in release config to allow prerelease versions
 - `test` depends on `^build` (dependencies are built first) and `test-storybook` (storybook interaction tests run first)
 

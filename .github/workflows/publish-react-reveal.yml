@@ -31,5 +31,20 @@ jobs:
 
       - run: pnpm nx build @bojectify/react-reveal
 
-      - run: npm publish --provenance --access public
+      - name: Skip if this version is already published
+        id: published
         working-directory: packages/react-reveal
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+            echo "already=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::$NAME@$VERSION is already on npm — skipping publish."
+          else
+            echo "already=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish
+        if: steps.published.outputs.already == 'false'
+        working-directory: packages/react-reveal
+        run: npm publish --provenance --access public

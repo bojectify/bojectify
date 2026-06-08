@@ -28,7 +28,15 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm exec playwright install --with-deps chromium
+      - name: Install Playwright browser (with system deps)
+        run: pnpm exec playwright install --with-deps chromium
+        timeout-minutes: 8
+        env:
+          # Stop apt from blocking on interactive needrestart/debconf prompts
+          # (no TTY in CI), which can hang `--with-deps` indefinitely.
+          DEBIAN_FRONTEND: noninteractive
+          NEEDRESTART_MODE: a
+          NEEDRESTART_SUSPEND: 1
 
       - run: pnpm nx format:check --base="remotes/origin/main"
       - run: pnpm nx run-many -t lint test build typecheck

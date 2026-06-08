@@ -96,25 +96,25 @@ export const Default: Story = {
 
     // carousel class and accessibility attributes
     const carousel = canvas.getByRole('region');
-    await expect(carousel.className).toContain('boject-carousel');
+    await expect(carousel.className).toContain('bojectify-carousel');
     await expect(carousel).toHaveAttribute('aria-roledescription', 'carousel');
     await expect(carousel).toHaveAttribute('aria-label', 'Carousel');
     await expect(carousel).toHaveAttribute('tabindex', '0');
 
     // CSS custom properties fall back to defaults when props are omitted
     const computedStyle = getComputedStyle(carousel);
-    await expect(computedStyle.getPropertyValue('--boject-carousel-gap')).toBe(
-      '16px'
-    );
     await expect(
-      computedStyle.getPropertyValue('--boject-carousel-slide-width')
+      computedStyle.getPropertyValue('--bojectify-carousel-gap')
+    ).toBe('16px');
+    await expect(
+      computedStyle.getPropertyValue('--bojectify-carousel-slide-width')
     ).toBe('100%');
 
     // slide class and accessibility attributes
     const slides = canvas.getAllByRole('group');
     await expect(slides).toHaveLength(3);
     for (const slide of slides) {
-      await expect(slide.className).toContain('boject-carousel__slide');
+      await expect(slide.className).toContain('bojectify-carousel__slide');
       await expect(slide).toHaveAttribute('aria-roledescription', 'slide');
     }
   },
@@ -161,7 +161,7 @@ export const PartialSlideWidth: Story = {
     const canvas = within(canvasElement);
     const carousel = canvas.getByRole('region');
     await expect(
-      carousel.style.getPropertyValue('--boject-carousel-slide-width')
+      carousel.style.getPropertyValue('--bojectify-carousel-slide-width')
     ).toBe('80%');
   },
 };
@@ -172,16 +172,16 @@ export const ResponsiveSlides: Story = {
     <>
       <style>{`
         .responsive-carousel {
-          --boject-carousel-slide-width: 100%;
+          --bojectify-carousel-slide-width: 100%;
         }
         @media (min-width: 640px) {
           .responsive-carousel {
-            --boject-carousel-slide-width: calc((50% - var(--boject-carousel-gap) / 2) - 5%);
+            --bojectify-carousel-slide-width: calc((50% - var(--bojectify-carousel-gap) / 2) - 5%);
           }
         }
         @media (min-width: 1024px) {
           .responsive-carousel {
-            --boject-carousel-slide-width: calc(33.333% - var(--boject-carousel-gap) * 2 / 3);
+            --bojectify-carousel-slide-width: calc(33.333% - var(--bojectify-carousel-gap) * 2 / 3);
           }
         }
       `}</style>
@@ -208,11 +208,11 @@ export const CustomGap: Story = {
     const canvas = within(canvasElement);
     const carousel = canvas.getByRole('region');
     await expect(
-      carousel.style.getPropertyValue('--boject-carousel-slide-width')
+      carousel.style.getPropertyValue('--bojectify-carousel-slide-width')
     ).toBe('80%');
-    await expect(carousel.style.getPropertyValue('--boject-carousel-gap')).toBe(
-      '32px'
-    );
+    await expect(
+      carousel.style.getPropertyValue('--bojectify-carousel-gap')
+    ).toBe('32px');
   },
 };
 
@@ -238,22 +238,22 @@ export const CustomScrollButtons: Story = {
     const carousel = canvas.getByRole('region');
     await expect(
       carousel.style.getPropertyValue(
-        '--boject-carousel-scroll-button-prev-content'
+        '--bojectify-carousel-scroll-button-prev-content'
       )
     ).toBe("'←'");
     await expect(
       carousel.style.getPropertyValue(
-        '--boject-carousel-scroll-button-prev-label'
+        '--bojectify-carousel-scroll-button-prev-label'
       )
     ).toBe("'Anterior'");
     await expect(
       carousel.style.getPropertyValue(
-        '--boject-carousel-scroll-button-next-content'
+        '--bojectify-carousel-scroll-button-next-content'
       )
     ).toBe("'→'");
     await expect(
       carousel.style.getPropertyValue(
-        '--boject-carousel-scroll-button-next-label'
+        '--bojectify-carousel-scroll-button-next-label'
       )
     ).toBe("'Següent'");
   },

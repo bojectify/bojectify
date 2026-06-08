@@ -5,7 +5,7 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/react-store-async',
   plugins: [],
   test: {
-    name: '@boject/react-store-async',
+    name: '@bojectify/react-store-async',
     watch: false,
     globals: true,
     environment: 'node',

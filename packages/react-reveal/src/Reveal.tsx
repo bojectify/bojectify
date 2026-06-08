@@ -26,9 +26,9 @@ export function Reveal({
     distance !== null && distance !== '0' && distance !== '0px';
 
   const classes = [
-    'boject-reveal',
-    fadeIn && 'boject-reveal--fade-in',
-    hasTransform && 'boject-reveal--transform',
+    'bojectify-reveal',
+    fadeIn && 'bojectify-reveal--fade-in',
+    hasTransform && 'bojectify-reveal--transform',
     className,
   ]
     .filter(Boolean)
@@ -39,11 +39,11 @@ export function Reveal({
     : undefined;
 
   const combinedStyle = {
-    '--boject-reveal-duration': `${duration}ms`,
-    '--boject-reveal-delay': `${delay}ms`,
-    '--boject-reveal-distance': distance,
-    '--boject-reveal-easing': easing,
-    '--boject-reveal-transform': transformValue,
+    '--bojectify-reveal-duration': `${duration}ms`,
+    '--bojectify-reveal-delay': `${delay}ms`,
+    '--bojectify-reveal-distance': distance,
+    '--bojectify-reveal-easing': easing,
+    '--bojectify-reveal-transform': transformValue,
     ...(fadeIn && { opacity: 0 }),
     ...(hasTransform && { transform: transformValue }),
     ...style,

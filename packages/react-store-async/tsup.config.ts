@@ -10,5 +10,5 @@ export default defineConfig({
     },
   },
   clean: true,
-  external: ['react', 'react-dom', '@boject/react-store'],
+  external: ['react', 'react-dom', '@bojectify/react-store'],
 });

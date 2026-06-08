@@ -10,7 +10,7 @@ describe('Carousel', () => {
       </Carousel>
     );
     const el = screen.getByTestId('carousel');
-    expect(el.className).toContain('boject-carousel');
+    expect(el.className).toContain('bojectify-carousel');
     expect(el.className).toContain('custom');
   });
 
@@ -23,7 +23,7 @@ describe('Carousel', () => {
       </Carousel>
     );
     const el = screen.getByTestId('slide');
-    expect(el.className).toContain('boject-carousel__slide');
+    expect(el.className).toContain('bojectify-carousel__slide');
     expect(el.className).toContain('custom-slide');
   });
 

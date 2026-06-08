@@ -12,7 +12,7 @@ export default defineConfig(() => ({
       {
         extends: true as const,
         test: {
-          name: '@boject/react-reveal',
+          name: '@bojectify/react-reveal',
           watch: false,
           globals: true,
           environment: 'jsdom',

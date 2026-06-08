@@ -1,23 +1,23 @@
-# @boject/react-store-async
+# @bojectify/react-store-async
 
-[![CI](https://github.com/bojectify/boject/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/boject/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/@boject/react-store-async)](https://www.npmjs.com/package/@boject/react-store-async)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@boject/react-store-async)](https://bundlephobia.com/package/@boject/react-store-async)
-[![License](https://img.shields.io/npm/l/@boject/react-store-async)](https://github.com/bojectify/boject/blob/main/LICENSE)
+[![CI](https://github.com/bojectify/bojectify/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/bojectify/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@bojectify/react-store-async)](https://www.npmjs.com/package/@bojectify/react-store-async)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@bojectify/react-store-async)](https://bundlephobia.com/package/@bojectify/react-store-async)
+[![License](https://img.shields.io/npm/l/@bojectify/react-store-async)](https://github.com/bojectify/bojectify/blob/main/LICENSE)
 
-Async fetch helpers for [@boject/react-store](https://www.npmjs.com/package/@boject/react-store). Provides the REQUEST / SUCCESS / ERROR pattern for data fetching with minimal boilerplate.
+Async fetch helpers for [@bojectify/react-store](https://www.npmjs.com/package/@bojectify/react-store). Provides the REQUEST / SUCCESS / ERROR pattern for data fetching with minimal boilerplate.
 
 ## Install
 
 ```bash
-npm install @boject/react-store @boject/react-store-async react
+npm install @bojectify/react-store @bojectify/react-store-async react
 ```
 
 ## Usage
 
 ```tsx
-import { createStore } from '@boject/react-store';
-import { createFetchAction, asyncReducer } from '@boject/react-store-async';
+import { createStore } from '@bojectify/react-store';
+import { createFetchAction, asyncReducer } from '@bojectify/react-store-async';
 
 const fetchUser = createFetchAction('FETCH_USER');
 
@@ -103,7 +103,7 @@ type AsyncState<T> = {
 ## Requirements
 
 - React >= 18.0.0
-- @boject/react-store >= 0.0.1
+- @bojectify/react-store >= 0.0.1
 
 ## License
 

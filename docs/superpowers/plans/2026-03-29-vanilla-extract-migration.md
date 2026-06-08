@@ -262,7 +262,7 @@ Changes: removed `injectStyle: true`, added `esbuildPlugins: [vanillaExtractPlug
 - [ ] **Step 2: Build and verify output**
 
 ```bash
-pnpm nx build @boject/react-reveal
+pnpm nx build @bojectify/react-reveal
 ls packages/react-reveal/dist/
 ```
 
@@ -325,10 +325,10 @@ The Vite plugin processes `.css.ts` files during:
 - [ ] **Step 2: Start Storybook and verify**
 
 ```bash
-pnpm nx storybook @boject/react-reveal
+pnpm nx storybook @bojectify/react-reveal
 ```
 
-Expected: stories render with animations. Check that the Reveal component has generated class names (not `boject-reveal`).
+Expected: stories render with animations. Check that the Reveal component has generated class names (not `bojectify-reveal`).
 
 - [ ] **Step 3: Commit**
 
@@ -509,14 +509,14 @@ describe('Reveal', () => {
 Key changes:
 
 - Import `* as css from './Reveal.css.js'` for typed class names and vars.
-- Replace string literals (`'boject-reveal--fade-in'`) with typed imports (`css.fadeIn`).
-- Replace CSS custom property strings (`'--boject-reveal-duration'`) with typed var imports (`css.duration`).
-- Removed assertions on `--boject-reveal-distance` and `--boject-reveal-transform` — these are no longer set as named CSS custom properties. The distance is an intermediate value, and the transform is set as a standard inline `transform` style plus the `css.initialTransform` var.
+- Replace string literals (`'bojectify-reveal--fade-in'`) with typed imports (`css.fadeIn`).
+- Replace CSS custom property strings (`'--bojectify-reveal-duration'`) with typed var imports (`css.duration`).
+- Removed assertions on `--bojectify-reveal-distance` and `--bojectify-reveal-transform` — these are no longer set as named CSS custom properties. The distance is an intermediate value, and the transform is set as a standard inline `transform` style plus the `css.initialTransform` var.
 
 - [ ] **Step 2: Run tests**
 
 ```bash
-pnpm nx test @boject/react-reveal
+pnpm nx test @bojectify/react-reveal
 ```
 
 Expected: all tests pass.
@@ -547,13 +547,13 @@ Add this entry to the `"exports"` object:
 This lets SSR consumers import the static CSS:
 
 ```ts
-import '@boject/react-reveal/styles.css';
+import '@bojectify/react-reveal/styles.css';
 ```
 
 - [ ] **Step 2: Verify the export resolves**
 
 ```bash
-pnpm nx build @boject/react-reveal
+pnpm nx build @bojectify/react-reveal
 ls packages/react-reveal/dist/index.css
 ```
 
@@ -609,7 +609,7 @@ Add to the `"exports"` object in `packages/react-carousel/package.json`:
 - [ ] **Step 3: Build and verify**
 
 ```bash
-pnpm nx build @boject/react-carousel
+pnpm nx build @bojectify/react-carousel
 ls packages/react-carousel/dist/
 ```
 
@@ -660,8 +660,8 @@ Add a note to the consuming instructions about CSS imports for SSR:
 For server-side rendered apps (Next.js, Remix, etc.), import the styles in your root layout:
 
 \```tsx
-import '@boject/react-reveal/styles.css';
-import '@boject/react-carousel/styles.css';
+import '@bojectify/react-reveal/styles.css';
+import '@bojectify/react-carousel/styles.css';
 \```
 
 This ensures CSS is available during SSR and prevents flash of unstyled content.
@@ -689,8 +689,8 @@ Expected: all targets pass for all projects.
 - [ ] **Step 2: Verify Storybook for both packages**
 
 ```bash
-pnpm nx storybook @boject/react-reveal
-pnpm nx storybook @boject/react-carousel
+pnpm nx storybook @bojectify/react-reveal
+pnpm nx storybook @bojectify/react-carousel
 ```
 
 Expected: both Storybooks render correctly with styled components.

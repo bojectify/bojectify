@@ -2,7 +2,7 @@
 
 ## Overview
 
-Add Storybook to the `@boject/react-carousel` and `@boject/react-reveal` component packages for visual development and testing. Use the Nx Storybook generator to scaffold configuration, ensuring correct version alignment with the Nx workspace.
+Add Storybook to the `@bojectify/react-carousel` and `@bojectify/react-reveal` component packages for visual development and testing. Use the Nx Storybook generator to scaffold configuration, ensuring correct version alignment with the Nx workspace.
 
 ## Approach
 
@@ -10,8 +10,8 @@ Use `@nx/storybook` plugin's `configuration` generator to add Storybook directly
 
 ## Packages Affected
 
-- `@boject/react-carousel` — gets `.storybook/` config + `Carousel.stories.tsx`
-- `@boject/react-reveal` — gets `.storybook/` config + `Reveal.stories.tsx`
+- `@bojectify/react-carousel` — gets `.storybook/` config + `Carousel.stories.tsx`
+- `@bojectify/react-reveal` — gets `.storybook/` config + `Reveal.stories.tsx`
 
 Store packages (`react-store`, `react-store-async`) do not get Storybook — they have no visual output.
 
@@ -33,8 +33,8 @@ Stories to include:
 - **Default** — 3 slides with placeholder content
 - **Many Slides** — 6+ slides to demonstrate scrolling
 - **Custom Aria Label** — with `aria-label="Image gallery"`
-- **Custom Slide Width** — override `--boject-carousel-slide-width` via CSS to show partial slides (e.g. 80%)
-- **Custom Gap** — override `--boject-carousel-gap`
+- **Custom Slide Width** — override `--bojectify-carousel-slide-width` via CSS to show partial slides (e.g. 80%)
+- **Custom Gap** — override `--bojectify-carousel-gap`
 
 ### Reveal.stories.tsx
 

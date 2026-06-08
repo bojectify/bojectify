@@ -5,7 +5,7 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/react-store',
   plugins: [],
   test: {
-    name: '@boject/react-store',
+    name: '@bojectify/react-store',
     watch: false,
     globals: true,
     environment: 'jsdom',

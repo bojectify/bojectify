@@ -23,20 +23,15 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          # Node 22 (LTS): pnpm 11 requires Node >=22.13, and Playwright 1.59's
+          # browser install hangs after the Chromium download on Node 24.
+          node-version: 22
           cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright browser (with system deps)
-        run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright install --with-deps chromium
         timeout-minutes: 8
-        env:
-          # Stop apt from blocking on interactive needrestart/debconf prompts
-          # (no TTY in CI), which can hang `--with-deps` indefinitely.
-          DEBIAN_FRONTEND: noninteractive
-          NEEDRESTART_MODE: a
-          NEEDRESTART_SUSPEND: 1
 
       - run: pnpm nx format:check --base="remotes/origin/main"
       - run: pnpm nx run-many -t lint test build typecheck

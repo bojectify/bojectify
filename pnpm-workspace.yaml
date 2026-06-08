@@ -3,3 +3,17 @@ packages:
 
 onlyBuiltDependencies:
   - lefthook
+
+# Supply-chain hardening: refuse to install any dependency version published
+# less than this many minutes ago, giving time for malicious releases to be
+# caught and pulled. pnpm 11 defaults to 1440 (24h); we extend it to 3 days.
+minimumReleaseAge: 4320
+
+# Explicitly approve which dependency install scripts may run (supply-chain
+# control). Only lefthook needs to (it installs git hooks); the rest ship
+# prebuilt binaries and run fine with their scripts skipped.
+allowBuilds:
+  '@swc/core': false
+  esbuild: false
+  lefthook: true
+  nx: false

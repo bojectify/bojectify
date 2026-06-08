@@ -31,7 +31,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm exec playwright install --with-deps chromium
+      # headless-shell is all the headless Storybook browser tests need, and
+      # it's a smaller/faster download than full chromium.
+      - run: pnpm exec playwright install --with-deps chromium-headless-shell
         timeout-minutes: 8
 
       - run: pnpm nx format:check --base="remotes/origin/main"

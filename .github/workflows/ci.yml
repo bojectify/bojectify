@@ -13,6 +13,9 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -25,7 +28,7 @@ jobs:
         with:
           # Node 22 (LTS): pnpm 11 requires Node >=22.13, and Playwright 1.59's
           # browser install hangs after the Chromium download on Node 24.
-          node-version: 22
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile

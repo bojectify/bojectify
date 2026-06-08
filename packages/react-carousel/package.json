@@ -1,6 +1,8 @@
 {
   "name": "@bojectify/react-carousel",
-  "version": "0.0.1-rc.6",
+  "version": "0.0.1",
+  "description": "CSS-only scroll-snap carousel for React (RSC-compatible)",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -19,6 +21,16 @@
     "dist",
     "!**/*.tsbuildinfo"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bojectify/bojectify.git",
+    "directory": "packages/react-carousel"
+  },
+  "homepage": "https://github.com/bojectify/bojectify/tree/main/packages/react-carousel#readme",
+  "bugs": "https://github.com/bojectify/bojectify/issues",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "react": ">=18.0.0"
   },

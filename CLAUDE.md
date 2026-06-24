@@ -113,9 +113,16 @@ Run `pnpm nx lint <project>` to verify.
 
 - All project configuration lives in each `package.json` under the `"nx"` field — there are no `project.json` files
 - Nx plugins (`@nx/js/typescript`, `@nx/vite/plugin`, `@nx/eslint/plugin`, `@nx/vitest`, `@nx/storybook/plugin`) infer targets automatically
-- Release excludes root package (configured in `nx.json` → `release.projects: ["!@bojectify/source"]`)
-- `preserveMatchingDependencyRanges` is disabled in release config to allow prerelease versions
+- Release config (`nx.json` → `release`): `projects` explicitly lists the four publishable packages (the private root `@bojectify/source` is excluded by omission); `projectsRelationship: "independent"` so each package is versioned and git-tagged independently. The default tag pattern is `@bojectify/<pkg>@<version>`, which is what the publish workflows trigger on
+- `preserveMatchingDependencyRanges` is disabled — this allows prerelease versions, and means a workspace dependency's range is rewritten to the released version when its dependency is bumped (affects `react-store-async` → `react-store`)
 - `test` depends on `^build` (dependencies are built first) and `test-storybook` (storybook interaction tests run first)
+
+### Publishing
+
+- Each publishable package has a tag-triggered workflow (`.github/workflows/publish-<pkg>.yml`) that fires on a `@bojectify/<pkg>@*` tag, builds, then runs `npm publish --provenance --access public`
+- Auth is GitHub OIDC (npm trusted publisher) — no stored `NPM_TOKEN`. A "skip if already published" guard makes re-pushing an existing tag a safe no-op (green instead of a 403)
+- A package's **first** publish must be done manually, because a trusted publisher can only be configured on a package that already exists on npm. Run `pnpm -C packages/<pkg> publish --no-git-checks --access public` (the npm account has 2FA, so do it via an interactive terminal for the OTP). Use `pnpm publish` (not `npm`) so `workspace:*` deps are rewritten to a real version in the tarball
+- Normal release flow: `pnpm nx release --projects=<list>` (independent version bumps + tags) → push tags → CI publishes
 
 ### Git Hooks (Lefthook)
 

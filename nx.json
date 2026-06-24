@@ -60,7 +60,13 @@
     }
   ],
   "release": {
-    "projects": ["@bojectify/react-reveal", "@bojectify/react-carousel"],
+    "projects": [
+      "@bojectify/react-reveal",
+      "@bojectify/react-carousel",
+      "@bojectify/react-store",
+      "@bojectify/react-store-async"
+    ],
+    "projectsRelationship": "independent",
     "version": {
       "preVersionCommand": "npx nx run-many -t build",
       "preserveMatchingDependencyRanges": false

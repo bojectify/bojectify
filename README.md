@@ -13,7 +13,7 @@ Open source React component library monorepo, managed by [Nx](https://nx.dev) wi
 
 ## Getting Started
 
-**Prerequisites:** Node.js 20+, pnpm
+**Prerequisites:** Node.js 22.13+ (CI uses 24), pnpm 11
 
 ```bash
 # Install dependencies
@@ -115,13 +115,17 @@ This ensures CSS is available during SSR and prevents flash of unstyled content.
 
 ## Publishing
 
+Packages publish to npm from CI: pushing a `@bojectify/<pkg>@<version>` git tag triggers a GitHub Actions workflow that runs `npm publish` with provenance via an npm trusted publisher (OIDC — no stored token). A guard skips re-publishing a version that already exists. Use Nx release to create the independent, per-package version bumps and tags:
+
 ```bash
-# Dry run
+# Preview the next versions, tags, and changelog
 pnpm nx release --dry-run
 
-# Release to NPM
+# Version + tag (push the tags to trigger the CI publish)
 pnpm nx release
 ```
+
+A package's first-ever publish must be done manually, since trusted publishing can only be configured once the package exists on npm (see `CLAUDE.md` → Publishing).
 
 ### Local testing with Verdaccio
 

@@ -42,6 +42,36 @@ const { Provider, useStore } = createStore({
 });
 ```
 
+### Type your actions (optional)
+
+Annotate the `reducer`'s `action` with your own discriminated union and `createStore` infers it — no cast required. The inferred type flows into `dispatch`, so dispatching an unknown `type` or a mismatched `payload` is a compile error:
+
+```tsx
+type CounterAction = { type: 'INCREMENT'; payload: number } | { type: 'RESET' };
+
+const { Provider, useStore } = createStore({
+  initialState: { count: 0 },
+  reducer: (state, action: CounterAction) => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return { count: state.count + action.payload };
+      case 'RESET':
+        return { count: 0 };
+      default:
+        return state;
+    }
+  },
+  actions: {
+    increment: ({ dispatch }, amount: number) => {
+      dispatch({ type: 'INCREMENT', payload: amount }); // ✅ checked against CounterAction
+      // dispatch({ type: 'NOPE' });                     // ✗ compile error
+    },
+  },
+});
+```
+
+If you leave `action` untyped, it falls back to the loose `ActionPayload` (`{ type: string; payload?: unknown }`) — the same behaviour as before.
+
 ### Wrap your app
 
 ```tsx
@@ -82,12 +112,12 @@ Returns `{ Provider, useStore }`.
 
 **Config:**
 
-| Field          | Type                                     | Description                                                              |
-| -------------- | ---------------------------------------- | ------------------------------------------------------------------------ |
-| `initialState` | `S`                                      | Initial state object                                                     |
-| `reducer`      | `(state: S, action: ActionPayload) => S` | Standard reducer function                                                |
-| `actions`      | `Record<string, Action<S>>`              | Action functions receiving `{ state, dispatch }` and an optional payload |
-| `getters`      | `Record<string, Getter<S>>`              | Derived values from state, can reference other getters                   |
+| Field          | Type                           | Description                                                                                                                                          |
+| -------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `initialState` | `S`                            | Initial state object                                                                                                                                 |
+| `reducer`      | `(state: S, action: Act) => S` | Standard reducer. `Act` is inferred from the `action` annotation (defaults to `ActionPayload`); see [Type your actions](#type-your-actions-optional) |
+| `actions`      | `Record<string, Action<S>>`    | Action functions receiving `{ state, dispatch }` and an optional payload                                                                             |
+| `getters`      | `Record<string, Getter<S>>`    | Derived values from state, can reference other getters                                                                                               |
 
 ### Getters
 

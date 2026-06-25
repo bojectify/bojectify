@@ -5,26 +5,34 @@ export type ActionPayload<T extends string = string> = {
   payload?: unknown;
 };
 
-export type ActionContext<S> = {
+export type ActionContext<S, Act extends ActionPayload = ActionPayload> = {
   state: S;
-  dispatch: Dispatch<ActionPayload>;
+  dispatch: Dispatch<Act>;
 };
 
-export type Action<S> = (
-  context: ActionContext<S>,
+export type Action<S, Act extends ActionPayload = ActionPayload> = (
+  context: ActionContext<S, Act>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any
 ) => void | Promise<void>;
 
-export type Actions<S> = Record<string, Action<S>>;
+export type Actions<S, Act extends ActionPayload = ActionPayload> = Record<
+  string,
+  Action<S, Act>
+>;
 
 export type Getter<S> = (state: S, getters: Record<string, unknown>) => unknown;
 
 export type Getters<S> = Record<string, Getter<S>>;
 
-export type StoreConfig<S, A extends Actions<S>, G extends Getters<S>> = {
+export type StoreConfig<
+  S,
+  A extends Actions<S, Act>,
+  G extends Getters<S>,
+  Act extends ActionPayload = ActionPayload,
+> = {
   initialState: S;
-  reducer: (state: S, action: ActionPayload) => S;
+  reducer: (state: S, action: Act) => S;
   actions: A;
   getters?: G;
 };

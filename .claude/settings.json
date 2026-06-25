@@ -5,9 +5,13 @@
         "source": "github",
         "repo": "nrwl/nx-ai-agents-config"
       }
+    },
+    "bojectify": {
+      "source": { "source": "github", "repo": "bojectify/bojectify" }
     }
   },
   "enabledPlugins": {
-    "nx@nx-claude-plugins": true
+    "nx@nx-claude-plugins": true,
+    "platform@bojectify": true
   }
 }

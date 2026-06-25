@@ -29,7 +29,6 @@ services:
       - ./.git:/workspace/.git:ro
       - pnpm-store:/pnpm-store
       - playwright-cache:/home/node/.cache/ms-playwright
-    container_name: __PROJECT_NAME__ dev
 
   app:
     # Behind the `prod` profile so a bare `docker compose up` (and the host

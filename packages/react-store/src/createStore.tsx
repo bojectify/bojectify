@@ -9,6 +9,7 @@ import {
   type ReactElement,
 } from 'react';
 import type {
+  ActionPayload,
   Actions,
   Getters,
   StoreConfig,
@@ -18,9 +19,12 @@ import type {
 } from './createStore.types.js';
 import { resolveGetters } from './resolveGetters.js';
 
-export function createStore<S, A extends Actions<S>, G extends Getters<S>>(
-  config: StoreConfig<S, A, G>
-) {
+export function createStore<
+  S,
+  A extends Actions<S, Act>,
+  G extends Getters<S>,
+  Act extends ActionPayload = ActionPayload,
+>(config: StoreConfig<S, A, G, Act>) {
   const StoreContext = createContext<StoreValue<S, A, G> | null>(null);
 
   function Provider({

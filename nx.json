@@ -79,5 +79,6 @@
     "test": {
       "dependsOn": ["^build", "test-storybook"]
     }
-  }
+  },
+  "analytics": false
 }

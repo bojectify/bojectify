@@ -122,7 +122,10 @@ Run `pnpm nx lint <project>` to verify.
 - Each publishable package has a tag-triggered workflow (`.github/workflows/publish-<pkg>.yml`) that fires on a `@bojectify/<pkg>@*` tag, builds, then runs `npm publish --provenance --access public`
 - Auth is GitHub OIDC (npm trusted publisher) — no stored `NPM_TOKEN`. A "skip if already published" guard makes re-pushing an existing tag a safe no-op (green instead of a 403)
 - A package's **first** publish must be done manually, because a trusted publisher can only be configured on a package that already exists on npm. Run `pnpm -C packages/<pkg> publish --no-git-checks --access public` (the npm account has 2FA, so do it via an interactive terminal for the OTP). Use `pnpm publish` (not `npm`) so `workspace:*` deps are rewritten to a real version in the tarball
-- Normal release flow: `pnpm nx release --projects=<list>` (independent version bumps + tags) → push tags → CI publishes
+- Normal release flow (two helper scripts in `scripts/`, since `main` is protected and bare `nx release` commits straight to the current branch):
+  1. `pnpm release:prepare <specifier> <project...>` (e.g. `pnpm release:prepare patch @bojectify/react-store`) — rewrites manifests via `nx release version` (applies the co-bump + dependency-range rewrite), commits on a `release/<timestamp>` branch, and opens a PR. Co-bumped dependents (e.g. `react-store-async`) are versioned automatically; you don't name them.
+  2. Review and merge the PR.
+  3. `pnpm release:tag` — derives the bumped packages from the merged release commit, creates `@bojectify/<pkg>@<version>` tags on it (idempotent: skips tags already on the remote), and pushes them → CI publishes. Works regardless of merge strategy (squash/merge/rebase)
 
 ### Git Hooks (Lefthook)
 

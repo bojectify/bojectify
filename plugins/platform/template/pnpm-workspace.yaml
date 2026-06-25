@@ -1,0 +1,21 @@
+packages:
+  - '.'
+# pnpm 11 build-script gating (replaces the old onlyBuiltDependencies /
+# ignoredBuiltDependencies keys). false = do NOT run the dependency's install
+# script — the supply-chain-safe default and exactly the posture this repo's
+# dev-container hardening is about. esbuild / @swc/core / @parcel/watcher ship
+# prebuilt platform binaries via optional deps (verified working without their
+# scripts); sharp and unrs-resolver were already opted out.
+#
+# lefthook = false: its postinstall runs `lefthook install`, which rewrites
+# .git/hooks — that fails against the container's read-only .git mount, and
+# LEFTHOOK=0 does not suppress it in this version. Install hooks explicitly on
+# the host instead (`brew install lefthook && lefthook install`); the hooks
+# fire on the host and dispatch into the container via the pnpm shim.
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': false
+  esbuild: false
+  lefthook: false
+  sharp: false
+  unrs-resolver: false

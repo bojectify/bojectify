@@ -1,0 +1,154 @@
+{
+  "typography": {
+    "line-height": {
+      "small": {
+        "$type": "string",
+        "$value": "100%",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:100",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-line-height-small)"
+          },
+          "com.figma.type": "string",
+          "com.figma.isOverride": true
+        }
+      },
+      "normal": {
+        "$type": "string",
+        "$value": "120%",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:104",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-line-height-normal)"
+          },
+          "com.figma.type": "string",
+          "com.figma.isOverride": true
+        }
+      },
+      "large": {
+        "$type": "string",
+        "$value": "150%",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:108",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-line-height-large)"
+          },
+          "com.figma.type": "string",
+          "com.figma.isOverride": true
+        }
+      }
+    },
+    "font-size": {
+      "xs": {
+        "$type": "number",
+        "$value": 11,
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:62",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-font-size-xs)"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "s": {
+        "$type": "number",
+        "$value": 14,
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:66",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-font-size-s)"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "m": {
+        "$type": "number",
+        "$value": 18,
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:70",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-font-size-m)"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "l": {
+        "$type": "number",
+        "$value": 20,
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:74",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-font-size-l)"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 24,
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:78",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-font-size-xl)"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "xxl": {
+        "$type": "number",
+        "$value": 30,
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:82",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-font-size-xxl)"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "3xl": {
+        "$type": "number",
+        "$value": 36,
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2035:86",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "var(--s-typography-font-size-3xl)"
+          },
+          "com.figma.isOverride": true
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "xs"
+  }
+}

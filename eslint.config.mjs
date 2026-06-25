@@ -12,6 +12,8 @@ export default [
       '**/build',
       '**/vite.config.*.timestamp*',
       '**/vitest.config.*.timestamp*',
+      // Bundled template — linting is managed inside the template itself
+      'plugins/platform/template/**',
     ],
   },
   {

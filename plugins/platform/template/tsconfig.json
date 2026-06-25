@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vitest/globals"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "noUncheckedIndexedAccess": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@model/*": ["./src/model/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@siteConfig": ["./site.config.ts"],
+      "@siteFontsConfig": ["./site-fonts.config.ts"],
+      "@test-config/*": ["./src/test/config/*"],
+      "@transforms/*": ["./src/transforms/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts",
+    "stylelint.config.ts"
+  ],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,183 @@
+@use './breakpoints' as breakpoint;
+
+@mixin container {
+  margin-right: var(--s-breakpoint-gutter-xs);
+  margin-left: var(--s-breakpoint-gutter-xs);
+
+  @include breakpoint.up(s) {
+    margin-right: var(--s-breakpoint-gutter-s);
+    margin-left: var(--s-breakpoint-gutter-s);
+  }
+
+  @include breakpoint.up(m) {
+    margin-right: var(--s-breakpoint-gutter-m);
+    margin-left: var(--s-breakpoint-gutter-m);
+  }
+
+  @include breakpoint.up(l) {
+    margin-right: var(--s-breakpoint-gutter-l);
+    margin-left: var(--s-breakpoint-gutter-l);
+  }
+
+  @include breakpoint.up(xl) {
+    width: calc(var(--s-breakpoint-width-xl) - (var(--s-breakpoint-gutter-xl) * 2));
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@mixin container-flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-breakpoint-vertical-gap-xs);
+
+  @include breakpoint.up(s) {
+    gap: var(--s-breakpoint-vertical-gap-s);
+  }
+
+  @include breakpoint.up(m) {
+    gap: var(--s-breakpoint-vertical-gap-m);
+  }
+
+  @include breakpoint.up(l) {
+    gap: var(--s-breakpoint-vertical-gap-l);
+  }
+
+  @include breakpoint.up(xl) {
+    gap: var(--s-breakpoint-vertical-gap-xl);
+  }
+}
+
+/**
+ * Add padding to the top and bottom of a section, with the size increasing at each breakpoint. The padding is set using CSS variables, which are derived from design tokens andcan be overridden by the user.
+ */
+@mixin section-padding {
+  padding-top: var(--s-breakpoint-margin-y-xs);
+  padding-bottom: var(--s-breakpoint-margin-y-xs);
+
+  @include breakpoint.up(s) {
+    padding-top: var(--s-breakpoint-margin-y-s);
+    padding-bottom: var(--s-breakpoint-margin-y-s);
+  }
+
+  @include breakpoint.up(m) {
+    padding-top: var(--s-breakpoint-margin-y-m);
+    padding-bottom: var(--s-breakpoint-margin-y-m);
+  }
+
+  @include breakpoint.up(l) {
+    padding-top: var(--s-breakpoint-margin-y-l);
+    padding-bottom: var(--s-breakpoint-margin-y-l);
+  }
+
+  @include breakpoint.up(xl) {
+    padding-top: var(--s-breakpoint-margin-y-xl);
+    padding-bottom: var(--s-breakpoint-margin-y-xl);
+  }
+}
+
+@mixin breakout() {
+  margin-right: calc(50% - 50dvw);
+  margin-left: calc(50% - 50dvw);
+}
+
+@mixin unbreakout() {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+@mixin breakout-down {
+  margin-bottom: calc(-1 * var(--s-breakpoint-margin-y-xs));
+  padding-bottom: var(--s-breakpoint-margin-y-xs);
+
+  @include breakpoint.up(s) {
+    margin-bottom: calc(-1 * var(--s-breakpoint-margin-y-s));
+    padding-bottom: var(--s-breakpoint-margin-y-s);
+  }
+
+  @include breakpoint.up(m) {
+    margin-bottom: calc(-1 * var(--s-breakpoint-margin-y-m));
+    padding-bottom: var(--s-breakpoint-margin-y-m);
+  }
+
+  @include breakpoint.up(l) {
+    margin-bottom: calc(-1 * var(--s-breakpoint-margin-y-l));
+    padding-bottom: var(--s-breakpoint-margin-y-l);
+  }
+
+  @include breakpoint.up(xl) {
+    margin-bottom: calc(-1 * var(--s-breakpoint-margin-y-xl));
+    padding-bottom: var(--s-breakpoint-margin-y-xl);
+  }
+}
+
+/*
+  Extend background to edge of view port.
+  Best used to break out of the main container.
+  $color: matches the background color of the element you are in
+ */
+@mixin extend-container-background($color: null, $z-index: -1) {
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: $z-index;
+    top: 0;
+    left: calc(-1 * var(--s-breakpoint-gutter-xs));
+    width: var(--s-breakpoint-gutter-xs);
+    height: 100%;
+    background: $color;
+
+    @include breakpoint.up(s) {
+      left: calc(-1 * var(--s-breakpoint-gutter-s));
+      width: var(--s-breakpoint-gutter-s);
+    }
+
+    @include breakpoint.up(m) {
+      left: calc(-1 * var(--s-breakpoint-gutter-m));
+      width: var(--s-breakpoint-gutter-m);
+    }
+
+    @include breakpoint.up(l) {
+      left: calc(-1 * var(--s-breakpoint-gutter-l));
+      width: var(--s-breakpoint-gutter-l);
+    }
+
+    @include breakpoint.up(xl) {
+      // Container is fixed-width with auto margins at xl, so the gutter
+      // is the dynamic space between the container edge and viewport edge.
+      left: calc(-1 * (100vw - (var(--s-breakpoint-width-xl) - var(--s-breakpoint-gutter-xl) * 2)) / 2);
+      width: calc((100vw - (var(--s-breakpoint-width-xl) - var(--s-breakpoint-gutter-xl) * 2)) / 2);
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: calc(-1 * var(--s-breakpoint-gutter-xs));
+    width: var(--s-breakpoint-gutter-xs);
+    height: 100%;
+    background: $color;
+
+    @include breakpoint.up(s) {
+      right: calc(-1 * var(--s-breakpoint-gutter-s));
+      width: var(--s-breakpoint-gutter-s);
+    }
+
+    @include breakpoint.up(m) {
+      right: calc(-1 * var(--s-breakpoint-gutter-m));
+      width: var(--s-breakpoint-gutter-m);
+    }
+
+    @include breakpoint.up(l) {
+      right: calc(-1 * var(--s-breakpoint-gutter-l));
+      width: var(--s-breakpoint-gutter-l);
+    }
+
+    @include breakpoint.up(xl) {
+      right: calc(-1 * (100vw - (var(--s-breakpoint-width-xl) - var(--s-breakpoint-gutter-xl) * 2)) / 2);
+      width: calc((100vw - (var(--s-breakpoint-width-xl) - var(--s-breakpoint-gutter-xl) * 2)) / 2);
+    }
+  }
+}

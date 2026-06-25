@@ -1,0 +1,52 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    init: true
+    networks:
+      - internal
+    ports:
+      - '127.0.0.1:3002:3002' # next dev / standalone server
+      - '127.0.0.1:6009:6009' # Storybook
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    env_file:
+      - .env
+    environment:
+      # Keep git's optional refresh locks off so read-only ops against the
+      # read-only .git mount (status/blame/diff) don't complain.
+      GIT_OPTIONAL_LOCKS: '0'
+      # Skip lefthook's self-install: `lefthook` is in onlyBuiltDependencies,
+      # so `pnpm install` would run `lefthook install`, which writes
+      # .git/hooks — and .git is read-only here. Hooks live on the host.
+      LEFTHOOK: '0'
+    volumes:
+      - .:/workspace:cached
+      # Read-only .git: Docker rejects writes, so a compromised dep cannot
+      # rewrite history, mutate refs, or stage commits. Reading is allowed
+      # (editor Source Control / blame / diff work); fine for a public repo.
+      - ./.git:/workspace/.git:ro
+      - pnpm-store:/pnpm-store
+      - playwright-cache:/home/node/.cache/ms-playwright
+    container_name: __PROJECT_NAME__ dev
+
+  app:
+    # Behind the `prod` profile so a bare `docker compose up` (and the host
+    # shim's `up -d dev`) never triggers the production image build.
+    # Run explicitly with: docker compose --profile prod up app
+    profiles:
+      - prod
+    build:
+      context: .
+    ports:
+      - '3002:3002'
+    networks:
+      - internal
+
+volumes:
+  pnpm-store:
+  playwright-cache:
+
+networks:
+  internal:

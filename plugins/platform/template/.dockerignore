@@ -1,0 +1,44 @@
+node_modules
+.next
+.git
+.gitignore
+
+# Testing
+__screenshots__
+*.test.ts
+*.test.tsx
+*.screenshot.test.tsx
+.vitest-attachments
+
+# Storybook
+.storybook
+storybook-static
+*.stories.tsx
+*storybook.log
+
+# Documentation
+docs
+README.md
+CLAUDE.md
+
+# IDE and OS
+.vscode
+.idea
+.DS_Store
+*.swp
+*.swo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Claude
+.mcp.json
+.claude
+
+# Figma exports (raw JSON, not needed for build)
+figma_exports
+
+# GraphQL codegen output (regenerated in Docker via pnpm codegen)
+src/lib/graphql/__generated__

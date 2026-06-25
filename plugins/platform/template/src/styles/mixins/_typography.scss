@@ -1,0 +1,111 @@
+@use 'sass:map';
+
+/// Text style mixins mapped from Figma text styles.
+/// Each mixin references CSS custom properties from the design token system,
+/// so values adapt automatically across breakpoints and themes.
+
+$_heading-font-sizes: (
+  h1: var(--s-typography-font-size-3xl),
+  h2: var(--s-typography-font-size-xxl),
+  h3: var(--s-typography-font-size-xl),
+  h4: var(--s-typography-font-size-l),
+  h5: var(--s-typography-font-size-m),
+  h6: var(--s-typography-font-size-s),
+);
+$_heading-line-heights: (
+  h1: var(--s-typography-line-height-large),
+  h2: var(--s-typography-line-height-large),
+  h3: var(--s-typography-line-height-large),
+  h4: var(--s-typography-line-height-normal),
+  h5: var(--s-typography-line-height-normal),
+  h6: var(--s-typography-line-height-normal),
+);
+
+@mixin heading($level: h2) {
+  font-family: var(--s-typography-heading-font-family);
+  font-size: map.get($_heading-font-sizes, $level);
+  font-weight: var(--s-typography-heading-weight);
+  letter-spacing: 0.04em;
+  line-height: map.get($_heading-line-heights, $level);
+  text-transform: var(--s-typography-heading-text-transform);
+}
+
+@mixin h1-light {
+  @include heading(h1);
+}
+
+@mixin h2-light {
+  @include heading(h2);
+}
+
+@mixin h3-light {
+  @include heading(h3);
+}
+
+@mixin h4-light {
+  @include heading(h4);
+}
+
+@mixin h5-light {
+  @include heading(h5);
+}
+
+@mixin h6-light {
+  @include heading(h6);
+}
+
+$_body-font-sizes: (
+  m: var(--s-typography-font-size-m),
+  s: var(--s-typography-font-size-s),
+  xs: var(--s-typography-font-size-xs),
+);
+
+@mixin body($level: m) {
+  font-family: var(--s-typography-body-font-family);
+  font-size: map.get($_body-font-sizes, $level);
+  font-weight: var(--s-typography-body-weight);
+  line-height: var(--s-typography-line-height-large);
+  text-transform: var(--s-typography-body-text-transform);
+}
+
+@mixin body-bold {
+  font-family: var(--s-typography-body-bold-font-family);
+  font-size: var(--s-typography-font-size-m);
+  font-weight: var(--s-typography-body-bold-weight);
+  line-height: var(--s-typography-line-height-large);
+  text-transform: var(--s-typography-body-bold-text-transform);
+}
+
+@mixin button {
+  font-family: var(--s-typography-heading-font-family);
+  font-size: var(--s-typography-font-size-m);
+  font-weight: var(--s-typography-body-weight);
+  line-height: var(--s-typography-line-height-large);
+  text-transform: var(--s-typography-heading-text-transform);
+}
+
+$_code-font-sizes: (
+  m: var(--s-typography-font-size-m),
+  s: var(--s-typography-font-size-s),
+  xs: var(--s-typography-font-size-xs),
+);
+
+@mixin code($level: s) {
+  font-family: var(--s-typography-monospaced-font-family), monospace;
+  font-size: map.get($_code-font-sizes, $level);
+  font-weight: var(--s-typography-monospaced-weight);
+  line-height: var(--s-typography-line-height-large);
+  text-transform: var(--s-typography-monospaced-text-transform);
+}
+
+@mixin line-clamp($lines: 3) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+
+  /* number of lines to show */
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}

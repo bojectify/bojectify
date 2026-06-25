@@ -1,0 +1,54 @@
+# syntax=docker/dockerfile:1.7
+# Dev container for boject-pixi — supply-chain hardening.
+#
+# Debian-slim (glibc), NOT Alpine: Playwright's bundled
+# chromium-headless-shell can't run on musl. pixi.js renders in the
+# browser (no node-canvas), so we install only chromium runtime deps —
+# no cairo/pango/jpeg/gif/pixman.
+#
+# Every pnpm/pnpx on the dev machine routes into this container via the
+# host shims at scripts/host-shims/. See
+# docs/superpowers/specs/2026-06-08-dev-container-design.md.
+
+FROM node:24-slim
+
+# Shared corepack cache: prepare runs as root at build time, the container
+# runs as `node`. Without a shared COREPACK_HOME the node user's cache is
+# empty and corepack re-prompts to download pnpm on first use.
+ENV COREPACK_HOME=/opt/corepack
+
+ARG PNPM_VERSION=11.5.2
+RUN mkdir -p /opt/corepack \
+ && corepack enable \
+ && corepack prepare pnpm@${PNPM_VERSION} --activate \
+ && chmod -R a+rX /opt/corepack
+
+# Chromium runtime deps for Playwright. The browser binary itself is
+# downloaded via `pnpm exec playwright install` on first use and cached in
+# the playwright-cache named volume.
+#
+# Package names target Debian bookworm (node:24-slim's base). On a newer
+# base (trixie / the t64 ABI transition) some names gain a `t64` suffix —
+# e.g. libasound2 -> libasound2t64. If apt reports a package is not found,
+# add the t64 suffix to the affected lib.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      bash git ca-certificates \
+      libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxkbcommon0 \
+      libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+      libpangocairo-1.0-0 libxshmfence1 libdrm2 \
+      fonts-liberation fonts-noto-color-emoji \
+ && rm -rf /var/lib/apt/lists/*
+
+ENV PNPM_STORE_PATH=/pnpm-store
+
+# Pre-create the Playwright cache dir with node ownership so the named
+# volume mounted there initialises writable for the node user (an empty
+# volume otherwise gets created root-owned).
+RUN mkdir -p /home/node/.cache/ms-playwright \
+ && chown -R node:node /home/node/.cache
+
+USER node
+WORKDIR /workspace
+
+CMD ["tail", "-f", "/dev/null"]

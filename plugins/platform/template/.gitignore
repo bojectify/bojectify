@@ -1,0 +1,53 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# next.js
+.next
+out
+
+# build
+build
+dist
+
+# env files
+.env
+.env.*
+!.env.example
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# os
+.DS_Store
+Thumbs.db
+
+# ide
+.vscode
+.idea
+*.swp
+*.swo
+
+*storybook.log
+storybook-static
+example-stories
+
+# generated
+**/__generated__/
+
+# vitest
+.vitest-attachments/
+
+# claude
+.mcp.json
+.claude/settings.local.json

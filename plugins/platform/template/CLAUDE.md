@@ -26,4 +26,4 @@ TODO: describe this site's product.
 
 ## Brand / project name
 
-Brand and project name are set in `site.config.ts` (`BRAND = '__BRAND__'`) and `package.json` (`name = '__PROJECT_NAME__'`). Update both when scaffolding a new project.
+`package.json` ships the `name = '__PROJECT_NAME__'` placeholder (the scaffold replaces it). `site.config.ts` ships a concrete `BRAND = 'Boject'` — `BRAND` is the design-token selector (the token generator strips it from each `figma_exports` mode name), so the scaffold rebrands it together with the matching token files rather than leaving a placeholder.

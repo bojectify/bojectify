@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.7
-# Dev container for boject-pixi — supply-chain hardening.
+# Dev container for a Boject site — supply-chain hardening.
 #
 # Debian-slim (glibc), NOT Alpine: Playwright's bundled
-# chromium-headless-shell can't run on musl. pixi.js renders in the
+# chromium-headless-shell can't run on musl. The app renders in the
 # browser (no node-canvas), so we install only chromium runtime deps —
 # no cairo/pango/jpeg/gif/pixman.
 #

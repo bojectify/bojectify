@@ -9,6 +9,8 @@
     "typecheck:all": "nx run-many -t typecheck",
     "test:all": "nx run-many -t test",
     "build:all": "nx run-many -t build",
+    "release:prepare": "./scripts/release-prepare.sh",
+    "release:tag": "./scripts/release-tag.sh",
     "prepare": "lefthook install"
   },
   "private": true,

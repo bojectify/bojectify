@@ -6,3 +6,6 @@
 pnpm-lock.yaml
 
 .nx/self-healing
+
+# Bundled template — formatting is managed inside the template itself
+plugins/platform/template/

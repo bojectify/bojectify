@@ -1,0 +1,23 @@
+name: template-verify
+
+# Rot guard for the scaffold-project bundled template: prove it still builds
+# green (no CMS, no Redis) whenever the template, its verify script, or this
+# workflow changes. Builds on the runner via the same pnpm pipeline the dev
+# container runs locally.
+on:
+  pull_request:
+    paths:
+      - 'plugins/platform/template/**'
+      - 'plugins/platform/scripts/verify-template.sh'
+      - '.github/workflows/template-verify.yml'
+
+jobs:
+  verify-template:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build the bundled template green (no CMS, no Redis)
+        run: bash plugins/platform/scripts/verify-template.sh

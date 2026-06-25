@@ -1,0 +1,9 @@
+{
+  "Light": { "type": "default" },
+  "Dark": { "type": "media", "query": "prefers-color-scheme: dark" },
+  "Mode 1": { "type": "default" },
+  "xs": { "type": "default" },
+  "s": { "type": "media", "query": "min-width: 567px" },
+  "m": { "type": "media", "query": "min-width: 768px" },
+  "l": { "type": "media", "query": "min-width: 1024px" }
+}

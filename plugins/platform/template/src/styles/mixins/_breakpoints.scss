@@ -1,0 +1,30 @@
+@use 'sass:map';
+@use '../__generated__/breakpoints.generated' as bp;
+
+@mixin up($name) {
+  $width: map.get(bp.$breakpoints, $name);
+  @if not $width {
+    @error 'Unknown breakpoint "#{$name}". Available: #{map-keys(bp.$breakpoints)}';
+  }
+  @if $width == 0 {
+    @content;
+  } @else {
+    @media (width >= $width) {
+      @content;
+    }
+  }
+}
+
+@mixin down($name) {
+  $width: map.get(bp.$breakpoints, $name);
+  @if not $width {
+    @error 'Unknown breakpoint "#{$name}". Available: #{map-keys(bp.$breakpoints)}';
+  }
+  @if $width == 0 {
+    @content;
+  } @else {
+    @media (width < $width) {
+      @content;
+    }
+  }
+}

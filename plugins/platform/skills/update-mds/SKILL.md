@@ -1,3 +1,8 @@
+---
+name: update-mds
+description: Update the project's README.md and CLAUDE.md to reflect the current state of the codebase.
+---
+
 Update the project's `README.md`, `CLAUDE.md`, and all package `README.md` files to reflect the current state of the codebase.
 
 ## Steps

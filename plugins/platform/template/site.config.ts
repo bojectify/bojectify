@@ -6,7 +6,7 @@ import {
 } from '@constants/__generated__/routes.generated';
 import { composePathnames, type SegmentTranslations } from '@i18n/pathnames';
 
-const BRAND = 'Bojectify';
+const BRAND = '__BRAND__';
 
 const LOCALES_OBJ = [
   {

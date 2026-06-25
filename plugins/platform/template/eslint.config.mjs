@@ -37,7 +37,6 @@ const eslintConfig = defineConfig([
     'next-env.d.ts',
     'src/example-stories/**',
     'public/**',
-    'cache-handler.mjs',
   ]),
   ...storybook.configs['flat/recommended'],
   {

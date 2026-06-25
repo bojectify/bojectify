@@ -38,6 +38,8 @@ and auth are deliberately excluded — they are later, opt-in layers.
   with the project name.
 - `.devcontainer/devcontainer.json` → replace `__PROJECT_NAME__` (the container
   display name).
+- `README.md` → replace the `__PROJECT_NAME__` title, then sweep the repo for any
+  remaining `__PROJECT_NAME__` occurrences and replace them too.
 - `docker-compose.yml`, `.devcontainer/devcontainer.json`, and the `dev` /
   `storybook` scripts in `package.json` → set the chosen ports (defaults
   `3002` / `6009`).

@@ -1,8 +1,22 @@
 import type { Decorator } from '@storybook/nextjs-vite';
-import { Container } from '@components/ui/layout/container';
 
-export const ContainerDecorator: Decorator = (Story) => (
-  <Container>
-    <Story />
-  </Container>
-);
+/**
+ * Wrap a story in a fixed-width container. Useful for components that fill
+ * their parent (`width: 100%`) and would otherwise stretch to the full canvas
+ * in isolation — pass the width you want to preview them at.
+ *
+ * @param width - CSS width; a bare number is treated as pixels.
+ *
+ * @example
+ * const meta: Meta<typeof MyWideComponent> = {
+ *   decorators: [ContainerDecorator(700)],
+ * };
+ */
+export function ContainerDecorator(width: number | string): Decorator {
+  const w = typeof width === 'number' ? `${width}px` : width;
+  return (Story) => (
+    <div style={{ width: w, maxWidth: '100%' }}>
+      <Story />
+    </div>
+  );
+}

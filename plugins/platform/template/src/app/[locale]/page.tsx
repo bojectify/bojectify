@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from '@/../site.config';
+import { SITE_CONFIG } from '@siteConfig';
 import styles from './page.module.scss';
 
 export default function Home() {

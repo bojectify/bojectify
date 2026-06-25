@@ -3,7 +3,7 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { THEME_INIT_SCRIPT } from '@constants/themeScript';
 import '../styles/globals.scss';
 import { BODY_FONT, HEADING_FONT, MONO_FONT } from '@siteFontsConfig';
-import { SITE_CONFIG } from '@/../site.config';
+import { SITE_CONFIG } from '@siteConfig';
 
 export const metadata: Metadata = {
   title: SITE_CONFIG.BRAND,

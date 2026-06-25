@@ -1,6 +1,6 @@
 {
   "name": "@bojectify/react-store-async",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Async fetch helpers for @bojectify/react-store (REQUEST/SUCCESS/ERROR pattern)",
   "license": "MIT",
   "type": "module",
@@ -32,7 +32,7 @@
   },
   "peerDependencies": {
     "react": ">=18.0.0",
-    "@bojectify/react-store": ">=0.0.1"
+    "@bojectify/react-store": "0.0.2"
   },
   "devDependencies": {
     "vite": "^7.0.0",

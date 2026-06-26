@@ -25,16 +25,16 @@ pnpm dev       # http://localhost:3002
 
 ## Commands
 
-| Command                          | What it does                                        |
-| -------------------------------- | --------------------------------------------------- |
-| `pnpm dev`                       | Dev server — http://localhost:3002                  |
-| `pnpm build`                     | Production (standalone) build                       |
-| `pnpm typecheck`                 | TypeScript type-check                               |
-| `pnpm lint` / `pnpm lint:scss`   | ESLint / Stylelint                                  |
-| `pnpm test`                      | Vitest (unit + Storybook interaction + screenshots) |
-| `pnpm storybook`                 | Storybook — http://localhost:6009                   |
-| `pnpm codegen:tokens`            | Regenerate SCSS design tokens from `figma_exports/` |
-| `pnpm codegen:routes`            | Regenerate typed route constants                    |
+| Command                        | What it does                                        |
+| ------------------------------ | --------------------------------------------------- |
+| `pnpm dev`                     | Dev server — http://localhost:3002                  |
+| `pnpm build`                   | Production (standalone) build                       |
+| `pnpm typecheck`               | TypeScript type-check                               |
+| `pnpm lint` / `pnpm lint:scss` | ESLint / Stylelint                                  |
+| `pnpm test`                    | Vitest (unit + Storybook interaction + screenshots) |
+| `pnpm storybook`               | Storybook — http://localhost:6009                   |
+| `pnpm codegen:tokens`          | Regenerate SCSS design tokens from `figma_exports/` |
+| `pnpm codegen:routes`          | Regenerate typed route constants                    |
 
 ## Configuration
 

@@ -14,9 +14,11 @@ import type { Decorator } from '@storybook/nextjs-vite';
  */
 export function ContainerDecorator(width: number | string): Decorator {
   const w = typeof width === 'number' ? `${width}px` : width;
-  return (Story) => (
-    <div style={{ width: w, maxWidth: '100%' }}>
-      <Story />
-    </div>
-  );
+  return function ContainerDecoratorStory(Story) {
+    return (
+      <div style={{ width: w, maxWidth: '100%' }}>
+        <Story />
+      </div>
+    );
+  };
 }

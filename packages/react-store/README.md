@@ -104,6 +104,47 @@ function Counter() {
 }
 ```
 
+## Composing stores
+
+Each `createStore` call produces an independent store (its own Context + Provider). To combine several — the equivalent of [Pinia's composing stores](https://pinia.vuejs.org/cookbook/composing-stores.html) — read them together at the consumption layer rather than referencing one store from inside another.
+
+Read multiple stores in the same component:
+
+```tsx
+const { Provider: CartProvider, useStore: useCart } = createStore({
+  /* cart store */
+});
+const { Provider: UserProvider, useStore: useUser } = createStore({
+  /* user store */
+});
+
+function Checkout() {
+  const cart = useCart();
+  const user = useUser();
+
+  // derive across both stores right here
+  const total = cart.getters.subtotal * (user.state.isPremium ? 0.9 : 1);
+
+  return <p>Total: {total}</p>;
+}
+```
+
+For reusable cross-store logic, extract a custom hook — this is the direct analog of a "composed store":
+
+```tsx
+function useCheckout() {
+  const cart = useCart();
+  const user = useUser();
+
+  return {
+    total: cart.getters.subtotal * (user.state.isPremium ? 0.9 : 1),
+    canCheckout: cart.state.items.length > 0 && user.state.loggedIn,
+  };
+}
+```
+
+> **Why not reference another store from inside a getter or action?** Getters and actions run outside React's render cycle, so they can't call another store's `useStore()` hook (Rules of Hooks). Composing in a component or custom hook keeps cross-store logic where hooks are valid — and keeps each store's Provider scoping intact for testing and SSR isolation.
+
 ## API
 
 ### `createStore(config)`

@@ -27,6 +27,7 @@
     "@bojectify/react-carousel": "^0.0.1",
     "@bojectify/react-reveal": "^0.0.1",
     "@next/third-parties": "^16.2.0",
+    "classnames": "^2.5.1",
     "lodash": "^4.17.23",
     "next": "^16.2.0",
     "next-intl": "^4.9.1",

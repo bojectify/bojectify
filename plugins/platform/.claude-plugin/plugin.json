@@ -3,5 +3,6 @@
   "displayName": "Boject Platform Tools",
   "description": "Scaffold new Boject sites and maintain existing ones",
   "author": { "name": "Bojectify" },
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "commands": "./commands/"
 }

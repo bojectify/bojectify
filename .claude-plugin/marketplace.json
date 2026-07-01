@@ -2,11 +2,10 @@
   "name": "bojectify",
   "owner": { "name": "Bojectify", "email": "dev@boject.com" },
   "description": "Internal Claude Code plugins for the Bojectify org",
-  "metadata": { "pluginRoot": "./plugins" },
   "plugins": [
     {
       "name": "platform",
-      "source": "./platform",
+      "source": "./plugins/platform",
       "description": "Scaffolding and maintenance tooling for Boject sites"
     }
   ]

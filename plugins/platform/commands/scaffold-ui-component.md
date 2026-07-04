@@ -105,6 +105,27 @@ Scaffold the following files in `src/components/ui/<level>/<kebab-case-name>/`:
    };
    ```
 
+   Interaction/Storybook-play/Playwright tests select elements by `data-testid`
+   (`*ByTestId`) — never by role, aria-label, or text (keep those on the element
+   for accessibility; this convention is only about how tests _select_).
+
+   If the component renders elements inside a `.map()` loop, each looped element
+   needs a per-iteration id. Expose a modifier alongside the static ids using the
+   `testIdModifier` helper from the same module, then use the **same function** to
+   set `data-testid` in the loop and to query it (keeps the kebab-casing symmetric):
+
+   ```
+   import { testIds, testIdModifier } from '@test-config/testConfig.utils';
+
+   export const QA_<UPPER_SNAKE_CASE_NAME> = {
+     ...testIds('<UPPER_SNAKE_CASE_NAME>'),
+     OPTION: testIdModifier('<UPPER_SNAKE_CASE_NAME>', 'option').index, // OPTION(0) = first row
+   };
+   ```
+
+   `.index` gives `(i) => id` (padded, 1-based); `.id` gives `(nodeId) => id` —
+   prefer `.id` when the rows have stable ids.
+
 4. **`<camelCaseName>.module.scss`**
 
    ```

@@ -20,6 +20,13 @@ All commands run **inside the dev container** via host shims at `scripts/host-sh
 - `pnpm codegen:tokens` — design-token codegen (SCSS variables + TS types from Figma exports)
 - `pnpm codegen:routes` — route-manifest codegen (typed route constants)
 
+## Git conventions
+
+Branch names follow `<type>/<issue#>-<slug>` (e.g. `feat/6-canvas-render-layer`) —
+the GitHub issue number immediately after a conventional-commit type prefix. See
+the `creating-branches` skill (platform plugin) for the full rule: allowed types,
+what to do when there's no issue, and the paired PR `Closes #N` linkage.
+
 ## Product
 
 TODO: describe this site's product.

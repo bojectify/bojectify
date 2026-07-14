@@ -1,42 +1,39 @@
-# Dependabot version-update config. Security updates are enabled separately in
-# the repo's security settings and do not need this file — this adds the
-# proactive, scheduled updates that keep our *direct* tooling current, which is
-# what stops transitive advisories (vite/esbuild/babel/undici via build tools)
-# from piling up as un-fixable "update_not_possible" security alerts.
+# Dependabot: SECURITY UPDATES ONLY — scheduled version updates are disabled.
+#
+# `nx migrate` owns the versions of the Nx plugins and the tooling they wrap
+# (vite, vitest, storybook, eslint, typescript, @swc/*, …) and runs the codemods
+# to keep them mutually compatible. Letting Dependabot hand-bump those fights
+# Nx's version management and breaks the toolchain — e.g. Dependabot proposed
+# `typescript@7` (Microsoft's native Go compiler, no JS API), which broke
+# @nx/storybook's graph inference so nothing could build. Packages Nx does NOT
+# manage are bumped by hand. See issue #46.
+#
+# `open-pull-requests-limit: 0` disables *version* updates per ecosystem (see
+# GitHub docs: "temporarily disable version updates ... by setting this option
+# to zero"). Dependabot *security* updates are unaffected — they have a separate
+# internal limit and are enabled in the repo's security settings, so security
+# PRs keep flowing. To re-enable scheduled version updates, raise the limit
+# (and restore a `groups:` block to batch minor/patch bumps).
 version: 2
 
 updates:
   # Root pnpm workspace (the four packages + shared build/test tooling).
-  # `directory: /` covers the root package.json + pnpm-lock.yaml; the per-package
-  # manifests under packages/* share that lockfile.
   - package-ecosystem: npm
     directory: '/'
     schedule:
       interval: weekly
-    open-pull-requests-limit: 10
-    groups:
-      # Batch routine minor/patch bumps into a single PR to cut review noise;
-      # majors still come as individual PRs so they get scrutiny.
-      minor-and-patch:
-        update-types:
-          - minor
-          - patch
+    open-pull-requests-limit: 0
 
   # The bundled scaffold template ships its own package.json + pnpm-lock.yaml.
   - package-ecosystem: npm
     directory: '/plugins/platform/template'
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
-    groups:
-      minor-and-patch:
-        update-types:
-          - minor
-          - patch
+    open-pull-requests-limit: 0
 
-  # Keep the actions our workflows pin (checkout, setup-node, pnpm/action-setup)
-  # current — low-risk, and github-actions is well supported by Dependabot.
+  # GitHub Actions used by our workflows.
   - package-ecosystem: github-actions
     directory: '/'
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0

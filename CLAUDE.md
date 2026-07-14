@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-React component library monorepo (`@bojectify`) managed by Nx 22.x with pnpm. Contains 4 publishable NPM packages under `packages/`.
+React component library monorepo (`@bojectify`) managed by Nx 23.x with pnpm. Contains 4 publishable NPM packages under `packages/`.
 
 | Package                        | Tag                       | Description                                           |
 | ------------------------------ | ------------------------- | ----------------------------------------------------- |
@@ -96,7 +96,7 @@ Run `pnpm nx lint <project>` to verify.
 - **Vitest** via `@nx/vitest` plugin. Config per-package in `vite.config.ts`.
 - **@testing-library/react** for component packages (jsdom environment)
 - **Node environment** for store-async (pure functions, no DOM)
-- Workspace-level config in `vitest.workspace.ts` (scoped to `packages/*`; plain array export, no `defineWorkspace`)
+- Workspace-level config in `vitest.config.ts` (`test.projects` scoped to `packages/*`; Vitest 4 removed the old `vitest.workspace.ts`/`defineWorkspace` in favour of this)
 - Test files: `src/**/*.{test,spec}.{ts,tsx}`
 - Coverage: v8 provider → `./test-output/vitest/coverage`
 - **Storybook interaction tests** via `@storybook/addon-vitest` with Playwright browser mode. Stories with `play` functions run as real browser tests via the `test-storybook` Nx target (`vitest run --project storybook`). The `test` target depends on `test-storybook` so `pnpm nx run-many -t test` runs both unit and storybook tests.

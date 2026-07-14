@@ -8,12 +8,14 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/react-carousel',
   plugins: [react()],
   test: {
+    // `watch` is a global option; with `test.projects` it must be set here at
+    // the root (not per-project) to force run-once even in an interactive TTY.
+    watch: false,
     projects: [
       {
         extends: true as const,
         test: {
           name: '@bojectify/react-carousel',
-          watch: false,
           globals: true,
           environment: 'jsdom',
           include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],

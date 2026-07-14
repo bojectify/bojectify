@@ -35,7 +35,7 @@
     "@bojectify/react-store": "0.0.2"
   },
   "devDependencies": {
-    "vite": "^7.0.0",
+    "vite": "^8.1.4",
     "@bojectify/react-store": "workspace:*"
   },
   "sideEffects": false,

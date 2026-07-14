@@ -54,3 +54,4 @@ storybook-static
 
 # Host-local Claude conventions (point to the private bojectify-internal repo)
 CLAUDE.local.md
+.nx/migrate-runs

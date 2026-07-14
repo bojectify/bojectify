@@ -5,8 +5,10 @@ packages:
 # Dependabot can't bump in place (the parents cap them below the fix, so its
 # security-update jobs report "update_not_possible"). Bounded to the current
 # major to avoid surprise breaking bumps. See issue #27. Revisit when the
-# offending direct deps (vite / storybook / nx / babel) catch up and these
-# become redundant. pnpm 11 reads `overrides` here, not in package.json.
+# offending direct deps (storybook / nx / babel) catch up and these become
+# redundant. pnpm 11 reads `overrides` here, not in package.json.
+# (vite dropped from the overrides in #46 — `nx migrate` moved it to 8.x, which
+# is past the security floor, so the cap was made redundant.)
 overrides:
   '@babel/core': '>=7.29.6 <8'
   '@babel/plugin-transform-modules-systemjs': '>=7.29.4 <8'
@@ -23,7 +25,6 @@ overrides:
   tmp: '>=0.2.7 <0.3'
   undici: '>=7.28.0 <8'
   uuid: '>=11.1.1 <12'
-  vite: '>=7.3.5 <8'
 
 onlyBuiltDependencies:
   - lefthook

@@ -1,0 +1,15 @@
+# prod `app` block — optional. Builds & runs the PRODUCTION image locally,
+# gated behind `profiles: [prod]` so a bare `docker compose up` (and the
+# host-shim's `up -d dev`) never triggers it. Run: docker compose --profile prod up app.
+# Uses the production Dockerfile (build.context: .), NOT Dockerfile.dev — the
+# project must author that Dockerfile. Add this `app:` service under `services:`.
+# Included result: examples/web/docker-compose.yml.
+  app:
+    profiles:
+      - prod
+    build:
+      context: .
+    ports:
+      - '__APP_PORT__:__APP_PORT__'
+    networks:
+      - internal

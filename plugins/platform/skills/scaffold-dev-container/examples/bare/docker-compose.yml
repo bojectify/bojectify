@@ -1,0 +1,15 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    init: true
+    environment:
+      GIT_OPTIONAL_LOCKS: '0'
+      LEFTHOOK: '0'
+    volumes:
+      - .:/workspace:cached
+      - ./.git:/workspace/.git:ro
+      - pnpm-store:/pnpm-store
+volumes:
+  pnpm-store:

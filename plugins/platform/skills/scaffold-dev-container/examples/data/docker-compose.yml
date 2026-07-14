@@ -1,0 +1,83 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    init: true
+    networks:
+      - internal
+    ports:
+      - '127.0.0.1:3004:3004' # dev server
+      - '127.0.0.1:6011:6011' # Storybook
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    env_file:
+      - .env
+    environment:
+      GIT_OPTIONAL_LOCKS: '0'
+      LEFTHOOK: '0'
+      REDIS_URL: redis://redis:6379
+      DATABASE_URL: postgresql://boject:boject@db:5432/boject
+      MEILI_URL: http://meilisearch:7700
+    volumes:
+      - .:/workspace:cached
+      - ./.git:/workspace/.git:ro
+      - pnpm-store:/pnpm-store
+    depends_on:
+      db:
+        condition: service_started
+      redis:
+        condition: service_healthy
+      meilisearch:
+        condition: service_started
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: boject
+      POSTGRES_PASSWORD: boject
+      POSTGRES_DB: boject
+    ports:
+      - '127.0.0.1:5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - redis-data:/data
+    ports:
+      - '127.0.0.1:6383:6379'
+    networks:
+      - internal
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.45.2
+    restart: unless-stopped
+    environment:
+      MEILI_ENV: development
+      MEILI_NO_ANALYTICS: 'true'
+    ports:
+      - '127.0.0.1:7701:7700'
+    volumes:
+      - meilidata:/meili_data
+    networks:
+      - internal
+
+volumes:
+  pnpm-store:
+  pgdata:
+  redis-data:
+  meilidata:
+
+networks:
+  internal:

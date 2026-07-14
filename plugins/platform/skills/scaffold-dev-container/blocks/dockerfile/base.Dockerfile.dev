@@ -1,0 +1,23 @@
+# syntax=docker/dockerfile:1.7
+# Dev container for __PROJECT_NAME__ — supply-chain hardening. Debian-slim (glibc).
+FROM node:24-slim
+
+ENV COREPACK_HOME=/opt/corepack
+ARG PNPM_VERSION=__PNPM_VERSION__
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends bash git ca-certificates \
+ && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /opt/corepack \
+ && corepack enable \
+ && corepack prepare pnpm@${PNPM_VERSION} --activate \
+ && chmod -R a+rX /opt/corepack
+
+# pnpm reads config from `pnpm_config_*` env vars. STORE_PATH keys are not
+# recognized (silently ignored, defeating the named store volume).
+# PNPM_CONFIG_STORE_DIR is the correct key. See spec §5.4.
+ENV PNPM_CONFIG_STORE_DIR=/pnpm-store
+RUN mkdir -p /pnpm-store && chown node:node /pnpm-store
+# >>> playwright fragment inserted here when browser testing is enabled
+USER node
+WORKDIR /workspace
+CMD ["tail", "-f", "/dev/null"]

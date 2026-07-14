@@ -9,3 +9,6 @@ pnpm-lock.yaml
 
 # Bundled template — formatting is managed inside the template itself
 plugins/platform/template/
+
+# Skill reference blocks — placeholder templates, not formatted
+plugins/platform/skills/scaffold-dev-container/blocks/

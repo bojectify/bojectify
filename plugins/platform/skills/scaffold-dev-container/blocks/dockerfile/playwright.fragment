@@ -1,0 +1,12 @@
+# Chromium runtime deps for Playwright. The browser binary is fetched via
+# `pnpm exec playwright install` on first use and cached in playwright-cache.
+# On a newer base than bookworm some names gain a `t64` suffix (e.g.
+# libasound2 -> libasound2t64); add it if apt reports the package missing.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxkbcommon0 \
+      libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+      libpangocairo-1.0-0 libxshmfence1 libdrm2 \
+      fonts-liberation fonts-noto-color-emoji \
+ && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /home/node/.cache/ms-playwright && chown -R node:node /home/node/.cache

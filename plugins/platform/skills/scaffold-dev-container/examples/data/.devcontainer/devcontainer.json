@@ -1,0 +1,20 @@
+{
+  "name": "example-data dev",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint",
+        "prisma.prisma"
+      ]
+    }
+  },
+  "forwardPorts": [3004, 6011],
+  "overrideCommand": false,
+  "postCreateCommand": "pnpm install",
+  "remoteUser": "node"
+}

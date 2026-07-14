@@ -1,0 +1,60 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    init: true
+    networks:
+      - internal
+    ports:
+      - '127.0.0.1:3003:3003' # dev server
+      - '127.0.0.1:6010:6010' # Storybook
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    env_file:
+      - .env
+    environment:
+      GIT_OPTIONAL_LOCKS: '0'
+      LEFTHOOK: '0'
+      REDIS_URL: redis://redis:6379
+    volumes:
+      - .:/workspace:cached
+      - ./.git:/workspace/.git:ro
+      - pnpm-store:/pnpm-store
+      - playwright-cache:/home/node/.cache/ms-playwright
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - redis-data:/data
+    ports:
+      - '127.0.0.1:6382:6379'
+    networks:
+      - internal
+
+  app:
+    profiles:
+      - prod
+    build:
+      context: .
+    ports:
+      - '3003:3003'
+    networks:
+      - internal
+
+volumes:
+  pnpm-store:
+  redis-data:
+  playwright-cache:
+
+networks:
+  internal:

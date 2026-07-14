@@ -1,0 +1,42 @@
+# Dependabot version-update config. Security updates are enabled separately in
+# the repo's security settings and do not need this file — this adds the
+# proactive, scheduled updates that keep our *direct* tooling current, which is
+# what stops transitive advisories (vite/esbuild/babel/undici via build tools)
+# from piling up as un-fixable "update_not_possible" security alerts.
+version: 2
+
+updates:
+  # Root pnpm workspace (the four packages + shared build/test tooling).
+  # `directory: /` covers the root package.json + pnpm-lock.yaml; the per-package
+  # manifests under packages/* share that lockfile.
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      # Batch routine minor/patch bumps into a single PR to cut review noise;
+      # majors still come as individual PRs so they get scrutiny.
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  # The bundled scaffold template ships its own package.json + pnpm-lock.yaml.
+  - package-ecosystem: npm
+    directory: '/plugins/platform/template'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  # Keep the actions our workflows pin (checkout, setup-node, pnpm/action-setup)
+  # current — low-risk, and github-actions is well supported by Dependabot.
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly

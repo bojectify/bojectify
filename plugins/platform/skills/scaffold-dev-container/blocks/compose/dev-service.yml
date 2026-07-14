@@ -1,6 +1,8 @@
-# dev service — always present. For a headless infra/library project (no dev
-# server — the `bare`/sso shape), DROP these four sections: ports, networks,
-# extra_hosts, env_file. See examples/bare/docker-compose.yml. Keep the rest.
+# dev service — always present. When there is no dev server (app port =
+# "none"), DROP ports, extra_hosts, and env_file — see
+# examples/bare/docker-compose.yml. DROP networks too only if there are also
+# no sidecars selected (the true `bare`/sso shape). If a sidecar is chosen,
+# keep `networks: [internal]` even with no dev server. Keep the rest.
 services:
   dev:
     build:

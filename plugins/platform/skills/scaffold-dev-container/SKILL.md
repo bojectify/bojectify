@@ -36,15 +36,15 @@ empty except an optional `.git`. Still write the full harness, and pin
 
 ## 3. Interview (one question at a time)
 
-| #   | Prompt                              | Default / smart-detect                                                                                                                                                                                                                                                                      |
-| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **Project name**                    | Existing `package.json` `name`, else the directory name. → container display name (`"<name> dev"`).                                                                                                                                                                                         |
-| 2   | **App dev port**                    | Next free app port in the registry below, suggested; user may override. Answering **"none"** (a headless infra/CDK/library project — the bare shape) drops the dev service's `ports`, `networks`, `extra_hosts`, and `env_file` sections entirely — see `examples/bare/docker-compose.yml`. |
-| 3   | **Storybook? + port**               | Present only if a `storybook` script is detected; port = next free Storybook port. Skipped entirely if no Storybook.                                                                                                                                                                        |
-| 4   | **Sidecar services** (multi-select) | none · **redis** · **postgres** · **meilisearch**. Drives `depends_on`, env, volumes, and the footer.                                                                                                                                                                                       |
-| 5   | **Browser / Playwright testing?**   | Yes if Storybook or a Playwright/browser test tool is detected, else No. Adds the Dockerfile playwright fragment + `playwright-cache` volume.                                                                                                                                               |
-| 6   | **Prod `app` image profile?**       | Yes for app projects, No for infra/libs (the bare shape).                                                                                                                                                                                                                                   |
-| 7   | **VS Code extensions**              | `dbaeumer.vscode-eslint` + `esbenp.prettier-vscode` always; offer `stylelint.vscode-stylelint` (default on if CSS/SCSS present), plus `bradlc.vscode-tailwindcss`, `prisma.prisma`, `nuxtr.nuxt-vscode-extentions` per detected stack.                                                      |
+| #   | Prompt                              | Default / smart-detect                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **Project name**                    | Existing `package.json` `name`, else the directory name. → container display name (`"<name> dev"`).                                                                                                                                                                                                                                                                                                                    |
+| 2   | **App dev port**                    | Next free app port in the registry below, suggested; user may override. Answering **"none"** (no dev server) drops the dev service's `ports`, `extra_hosts`, and `env_file` sections — see `examples/bare/docker-compose.yml`. `networks` is **not** tied to this answer: it stays if a sidecar is chosen in item 4, even with port "none", and drops only when item 4 also has no sidecars (the true bare/sso shape). |
+| 3   | **Storybook? + port**               | Present only if a `storybook` script is detected; port = next free Storybook port. Skipped entirely if no Storybook.                                                                                                                                                                                                                                                                                                   |
+| 4   | **Sidecar services** (multi-select) | none · **redis** · **postgres** · **meilisearch**. Drives `depends_on`, env, volumes, and the footer.                                                                                                                                                                                                                                                                                                                  |
+| 5   | **Browser / Playwright testing?**   | Yes if Storybook or a Playwright/browser test tool is detected, else No. Adds the Dockerfile playwright fragment + `playwright-cache` volume.                                                                                                                                                                                                                                                                          |
+| 6   | **Prod `app` image profile?**       | Yes for app projects, No for infra/libs (the bare shape).                                                                                                                                                                                                                                                                                                                                                              |
+| 7   | **VS Code extensions**              | `dbaeumer.vscode-eslint` + `esbenp.prettier-vscode` always; offer `stylelint.vscode-stylelint` (default on if CSS/SCSS present), plus `bradlc.vscode-tailwindcss`, `prisma.prisma`, `nuxtr.nuxt-vscode-extentions` per detected stack.                                                                                                                                                                                 |
 
 ### Port registry (known-taken across the family)
 
@@ -84,8 +84,12 @@ comment documents exactly what to merge where — follow it literally.
 
 - **`docker-compose.yml`** — start from `blocks/compose/dev-service.yml` (the
   always-present `dev` service). If item 2 was "none", drop `ports`,
-  `networks`, `extra_hosts`, and `env_file` from it (`examples/bare/`).
-  For each sidecar chosen in item 4, add its service block
+  `extra_hosts`, and `env_file` from it — these are tied to having a dev
+  server. `networks` is tied to sidecar/port presence, not the port answer:
+  drop it too only if item 4 also has no sidecars chosen (the true bare/sso
+  shape, `examples/bare/`); if a sidecar is chosen, keep
+  `networks: [internal]` even though the port is "none". For each sidecar
+  chosen in item 4, add its service block
   (`blocks/compose/{redis,postgres,meilisearch}.yml`), merge its documented
   `dev`-service additions (one `environment` key + one `depends_on` entry),
   and add its footer volume key. `examples/web/docker-compose.yml` shows one
@@ -96,7 +100,7 @@ comment documents exactly what to merge where — follow it literally.
   `examples/web/docker-compose.yml`. Finish with `blocks/compose/footer.yml`:
   `volumes:` always lists `pnpm-store` plus one key per block actually used;
   `networks:` declares `internal` whenever any sidecar or published port
-  exists, and is dropped entirely for the bare/"none"-port shape.
+  exists, and is dropped only when neither is present (the bare/sso shape).
 - **`Dockerfile.dev`** — start from `blocks/dockerfile/base.Dockerfile.dev`
   (the corrected `ENV PNPM_CONFIG_STORE_DIR=/pnpm-store` base — never the
   template's `PNPM_STORE_PATH`, which pnpm silently ignores). When item 5 is

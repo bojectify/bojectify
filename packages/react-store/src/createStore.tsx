@@ -41,7 +41,10 @@ export function createStore<
     stateRef.current = state;
 
     const actions = useMemo(() => {
-      const bound = {} as Record<string, unknown>;
+      const bound = {} as Record<
+        string,
+        (payload?: unknown) => void | Promise<void>
+      >;
       for (const [key, action] of Object.entries(config.actions)) {
         bound[key] = (payload?: unknown) =>
           action({ state: stateRef.current, dispatch }, payload);

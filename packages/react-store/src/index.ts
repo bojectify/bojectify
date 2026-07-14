@@ -11,3 +11,4 @@ export type {
   StoreValue,
   ProviderProps,
 } from './createStore.types.js';
+export { CyclicGetterError } from './errors.config.js';

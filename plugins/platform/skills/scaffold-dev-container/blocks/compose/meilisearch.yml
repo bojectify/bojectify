@@ -1,0 +1,19 @@
+# meilisearch sidecar block.
+#   1. Add this `meilisearch:` service under `services:`.
+#   2. Merge into the dev service:
+#        environment:  MEILI_URL: http://meilisearch:7700
+#        depends_on:   meilisearch: { condition: service_started }
+#   3. Add `meilidata:` under the footer `volumes:`.
+# Fully-merged result: examples/data/docker-compose.yml.
+  meilisearch:
+    image: getmeili/meilisearch:v1.45.2
+    restart: unless-stopped
+    environment:
+      MEILI_ENV: development
+      MEILI_NO_ANALYTICS: 'true'
+    ports:
+      - '127.0.0.1:__MEILI_HOST_PORT__:7700'
+    volumes:
+      - meilidata:/meili_data
+    networks:
+      - internal

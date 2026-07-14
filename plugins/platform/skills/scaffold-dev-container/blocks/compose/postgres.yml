@@ -1,0 +1,20 @@
+# postgres sidecar block (service name `db`).
+#   1. Add this `db:` service under `services:`.
+#   2. Merge into the dev service:
+#        environment:  DATABASE_URL: postgresql://boject:boject@db:5432/boject
+#        depends_on:   db: { condition: service_started }
+#   3. Add `pgdata:` under the footer `volumes:`.
+# Fully-merged result: examples/data/docker-compose.yml.
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: boject
+      POSTGRES_PASSWORD: boject
+      POSTGRES_DB: boject
+    ports:
+      - '127.0.0.1:__PG_HOST_PORT__:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal

@@ -1,0 +1,17 @@
+# Footer — append once, after all services.
+# `volumes:` always includes pnpm-store. Add a key only when its block is used:
+#   redis-data       (redis)
+#   pgdata           (postgres)
+#   meilidata        (meilisearch)
+#   playwright-cache (browser testing)
+# `networks:` — include the `internal:` network whenever any sidecar or published
+# port exists; DROP it entirely for the bare/infra shape (examples/bare/).
+volumes:
+  pnpm-store:
+  # redis-data:
+  # pgdata:
+  # meilidata:
+  # playwright-cache:
+
+networks:
+  internal:

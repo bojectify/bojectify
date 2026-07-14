@@ -1,0 +1,28 @@
+# dev service — always present. For a headless infra/library project (no dev
+# server — the `bare`/sso shape), DROP these four sections: ports, networks,
+# extra_hosts, env_file. See examples/bare/docker-compose.yml. Keep the rest.
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    init: true
+    networks:
+      - internal
+    ports:
+      - '127.0.0.1:__APP_PORT__:__APP_PORT__' # dev server
+      - '127.0.0.1:__SB_PORT__:__SB_PORT__' # Storybook — drop if no Storybook
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    env_file:
+      - .env
+    environment:
+      GIT_OPTIONAL_LOCKS: '0' # read-only .git mount: keep optional refresh locks off
+      LEFTHOOK: '0' # hooks are a host concern; .git is read-only in-container
+      # >>> dev-env: service URLs (REDIS_URL / DATABASE_URL / MEILI_URL) appended here
+    volumes:
+      - .:/workspace:cached
+      - ./.git:/workspace/.git:ro # read-only: a compromised dep cannot rewrite history
+      - pnpm-store:/pnpm-store
+      # >>> dev-volumes: playwright-cache appended here when browser testing is enabled
+    # >>> dev-depends: a depends_on: block appended here when sidecars exist

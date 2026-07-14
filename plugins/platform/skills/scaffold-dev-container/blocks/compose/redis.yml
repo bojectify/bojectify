@@ -1,0 +1,21 @@
+# redis sidecar block.
+#   1. Add this `redis:` service under `services:`.
+#   2. Merge into the dev service:
+#        environment:  REDIS_URL: redis://redis:6379
+#        depends_on:   redis: { condition: service_healthy }
+#   3. Add `redis-data:` under the footer `volumes:`.
+# Fully-merged result: examples/web/docker-compose.yml.
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - redis-data:/data
+    ports:
+      - '127.0.0.1:__REDIS_HOST_PORT__:6379'
+    networks:
+      - internal

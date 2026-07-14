@@ -1,0 +1,19 @@
+{
+  "name": "example-web dev",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint"
+      ]
+    }
+  },
+  "forwardPorts": [3003, 6010],
+  "overrideCommand": false,
+  "postCreateCommand": "pnpm install",
+  "remoteUser": "node"
+}

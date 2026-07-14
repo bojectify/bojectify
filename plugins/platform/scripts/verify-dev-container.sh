@@ -74,4 +74,13 @@ grep -q 'image: postgres:17'    "$EXAMPLES/data/docker-compose.yml" || fail "dat
 grep -q 'getmeili/meilisearch'  "$EXAMPLES/data/docker-compose.yml" || fail "data example should use meilisearch"
 echo "block<->example consistency OK"
 
+# --- SKILL.md sanity ---
+SKILL_MD="$SKILL/SKILL.md"
+[ -f "$SKILL_MD" ] || fail "SKILL.md missing"
+grep -q '^name: scaffold-dev-container$' "$SKILL_MD" || fail "SKILL.md frontmatter name mismatch"
+grep -q 'template/scripts/host-shims' "$SKILL_MD" || fail "SKILL.md must source host-shims from the template"
+grep -q 'registry.npmjs.org/pnpm/latest' "$SKILL_MD" || fail "SKILL.md must document pnpm resolution"
+for p in 3003 6010; do grep -q "$p" "$SKILL_MD" || fail "SKILL.md missing next-free port $p"; done
+echo "SKILL.md OK"
+
 echo "DEV-CONTAINER BLOCKS GREEN"

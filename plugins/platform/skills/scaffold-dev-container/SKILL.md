@@ -122,6 +122,10 @@ comment documents exactly what to merge where — follow it literally.
 - Write `.env.example` from `blocks/env.example.base`, uncommenting the
   service-URL lines (`REDIS_URL` / `DATABASE_URL` / `MEILI_URL`) matching the
   sidecars chosen in item 4.
+- If item 2's app port is not "none", the `dev` service has an `env_file`
+  (§5), and Compose requires that file to exist — `cp .env.example .env` so
+  the local, gitignored `.env` is present before §7 verify. Skip this for the
+  bare/"none" shape, which has no `env_file`.
 
 ## 7. Verify (fail-stop — halt and report on the first red step; never claim success on a red step)
 

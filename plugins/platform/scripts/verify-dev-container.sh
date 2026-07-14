@@ -67,6 +67,8 @@ grep -q 'image: redis:7-alpine' "$EXAMPLES/web/docker-compose.yml"  || fail "web
 grep -q 'profiles:'             "$EXAMPLES/web/docker-compose.yml"  || fail "web example should have prod-app profile"
 grep -q 'ms-playwright'         "$EXAMPLES/web/Dockerfile.dev"      || fail "web example should include playwright deps"
 ! grep -q 'image: redis'        "$EXAMPLES/bare/docker-compose.yml" || fail "bare example must have no sidecars"
+! grep -q 'image: postgres'    "$EXAMPLES/bare/docker-compose.yml" || fail "bare example must have no sidecars (postgres)"
+! grep -q 'getmeili/meilisearch' "$EXAMPLES/bare/docker-compose.yml" || fail "bare example must have no sidecars (meilisearch)"
 ! grep -q 'networks:'           "$EXAMPLES/bare/docker-compose.yml" || fail "bare example must have no networks"
 grep -q 'image: postgres:17'    "$EXAMPLES/data/docker-compose.yml" || fail "data example should use postgres"
 grep -q 'getmeili/meilisearch'  "$EXAMPLES/data/docker-compose.yml" || fail "data example should use meilisearch"

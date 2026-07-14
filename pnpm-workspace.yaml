@@ -1,6 +1,30 @@
 packages:
   - 'packages/*'
 
+# Security overrides — force patched versions of transitive dependencies that
+# Dependabot can't bump in place (the parents cap them below the fix, so its
+# security-update jobs report "update_not_possible"). Bounded to the current
+# major to avoid surprise breaking bumps. See issue #27. Revisit when the
+# offending direct deps (vite / storybook / nx / babel) catch up and these
+# become redundant. pnpm 11 reads `overrides` here, not in package.json.
+overrides:
+  '@babel/core': '>=7.29.6 <8'
+  '@babel/plugin-transform-modules-systemjs': '>=7.29.4 <8'
+  esbuild: '>=0.28.1 <0.29'
+  fast-uri: '>=3.1.2 <4'
+  follow-redirects: '>=1.16.0 <2'
+  form-data: '>=4.0.6 <5'
+  js-yaml: '>=4.2.0 <5'
+  lodash: '>=4.18.0 <5'
+  'picomatch@<2.3.2': '2.3.2'
+  'picomatch@>=4.0.0 <4.0.4': '4.0.4'
+  postcss: '>=8.5.10 <9'
+  qs: '>=6.15.2 <7'
+  tmp: '>=0.2.7 <0.3'
+  undici: '>=7.28.0 <8'
+  uuid: '>=11.1.1 <12'
+  vite: '>=7.3.5 <8'
+
 onlyBuiltDependencies:
   - lefthook
 

@@ -1,6 +1,13 @@
 packages:
   - '.'
 
+# Security overrides — force patched versions of transitive deps flagged by
+# Dependabot in this template's lockfile (esbuild / postcss, both dev-only,
+# pulled in via the build tooling). Bounded to the current major. See issue #27.
+overrides:
+  esbuild: '>=0.28.1 <0.29'
+  postcss: '>=8.5.10 <9'
+
 minimumReleaseAge: 4320
 # Exempt first-party @bojectify/* packages (we publish/control them) from the
 # 72h third-party release-age gate.

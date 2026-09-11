@@ -60,7 +60,7 @@
     "typescript-eslint": "^8.40.0",
     "verdaccio": "6.7.2",
     "vite": "8.1.4",
-    "vitest": "4.1.8"
+    "vitest": "4.1.11"
   },
   "nx": {
     "includedScripts": [],

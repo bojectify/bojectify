@@ -16,6 +16,10 @@ export type Action<S, Act extends ActionPayload = ActionPayload> = (
   payload?: any
 ) => void | Promise<void>;
 
+// Binding an action to the current state removes the need to pass the action
+// context through. That is {state, dispatch}.
+export type BoundAction = (payload?: unknown) => void | Promise<void>;
+
 export type Actions<S, Act extends ActionPayload = ActionPayload> = Record<
   string,
   Action<S, Act>
@@ -43,6 +47,7 @@ export type ResolvedGetters<G extends Getters<never>> = {
 
 export type StoreValue<S, A extends Actions<S>, G extends Getters<S>> = {
   state: S;
+  // key/value of bound actions
   actions: {
     [K in keyof A]: (payload?: Parameters<A[K]>[1]) => void | Promise<void>;
   };

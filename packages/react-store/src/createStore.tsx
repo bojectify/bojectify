@@ -16,6 +16,7 @@ import type {
   StoreValue,
   ProviderProps,
   ResolvedGetters,
+  BoundAction,
 } from './createStore.types.js';
 import { resolveGetters } from './resolveGetters.js';
 
@@ -41,10 +42,7 @@ export function createStore<
     stateRef.current = state;
 
     const actions = useMemo(() => {
-      const bound = {} as Record<
-        string,
-        (payload?: unknown) => void | Promise<void>
-      >;
+      const bound = {} as Record<string, BoundAction>;
       for (const [key, action] of Object.entries(config.actions)) {
         bound[key] = (payload?: unknown) =>
           action({ state: stateRef.current, dispatch }, payload);

@@ -10,8 +10,7 @@
     "test:all": "nx run-many -t test",
     "build:all": "nx run-many -t build",
     "release:prepare": "./scripts/release-prepare.sh",
-    "release:tag": "./scripts/release-tag.sh",
-    "prepare": "lefthook install"
+    "release:tag": "./scripts/release-tag.sh"
   },
   "private": true,
   "devDependencies": {
@@ -44,7 +43,6 @@
     "jiti": "2.4.2",
     "jsdom": "^29.0.0",
     "jsonc-eslint-parser": "^2.1.0",
-    "lefthook": "^2.1.4",
     "nx": "23.2.1",
     "playwright": "^1.60.0",
     "prettier": "~3.6.2",

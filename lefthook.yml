@@ -1,3 +1,7 @@
+# Lefthook is installed on the host, not via npm: brew install lefthook
+# then `lefthook install` once per clone (#62).
+min_version: 2.1.4
+
 pre-commit:
   parallel: true
   jobs:

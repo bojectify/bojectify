@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-React component library monorepo (`@bojectify`) managed by Nx 23.x with pnpm. Contains 4 publishable NPM packages under `packages/`.
+React component library monorepo (`@bojectify`) managed by Nx 23.x with pnpm 12 (pinned via `packageManager`; a global pnpm older than the pin auto-switches to it, but pnpm 11 releases as old as 11.11 can't launch pnpm 12's native binary — use `corepack pnpm` or upgrade the global pnpm). Contains 4 publishable NPM packages under `packages/`.
 
 | Package                        | Tag                       | Description                                           |
 | ------------------------------ | ------------------------- | ----------------------------------------------------- |

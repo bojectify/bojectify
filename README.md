@@ -13,7 +13,9 @@ Open source React component library monorepo, managed by [Nx](https://nx.dev) wi
 
 ## Getting Started
 
-**Prerequisites:** Node.js 22.13+ (CI uses 24), pnpm 11, [Lefthook](https://lefthook.dev) 2.1.4+
+**Prerequisites:** Node.js 22.13+ (CI uses 24), pnpm 12, [Lefthook](https://lefthook.dev) 2.1.4+
+
+The exact pnpm version is pinned in `package.json` (`packageManager`), and your global pnpm switches to it automatically. pnpm 12 ships as a native binary, which older pnpm 11 releases (e.g. 11.11) can't switch to: they crash with `SyntaxError: Invalid or unexpected token`. If you see that, upgrade your global pnpm (`pnpm self-update`, run outside the repo) or use `corepack pnpm`.
 
 ```bash
 # Install the git hooks manager (once per machine), then the hooks (once per clone)

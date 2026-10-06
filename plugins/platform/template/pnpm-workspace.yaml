@@ -14,7 +14,7 @@ minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - '@bojectify/*'
 
-# pnpm 11 build-script gating (replaces the old onlyBuiltDependencies /
+# pnpm 11+ build-script gating (replaces the old onlyBuiltDependencies /
 # ignoredBuiltDependencies keys). false = do NOT run the dependency's install
 # script — the supply-chain-safe default and exactly the posture this repo's
 # dev-container hardening is about. esbuild / @swc/core / @parcel/watcher ship

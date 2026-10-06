@@ -21,7 +21,7 @@ if grep -RInq -e '@apollo/client' -e 'graphql-codegen' -e 'REDIS_URL' package.js
 fi
 
 corepack enable
-pnpm install --frozen-lockfile=false
+pnpm install --no-frozen-lockfile
 pnpm codegen:tokens
 pnpm codegen:routes
 pnpm typecheck

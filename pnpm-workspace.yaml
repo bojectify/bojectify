@@ -6,7 +6,7 @@ packages:
 # security-update jobs report "update_not_possible"). Bounded to the current
 # major to avoid surprise breaking bumps. See issue #27. Revisit when the
 # offending direct deps (storybook / nx / babel) catch up and these become
-# redundant. pnpm 11 reads `overrides` here, not in package.json.
+# redundant. pnpm 11+ reads `overrides` here, not in package.json.
 # (vite dropped from the overrides in #46 — `nx migrate` moved it to 8.x, which
 # is past the security floor, so the cap was made redundant.)
 overrides:
@@ -32,7 +32,7 @@ overrides:
 
 # Supply-chain hardening: refuse to install any dependency version published
 # less than this many minutes ago, giving time for malicious releases to be
-# caught and pulled. pnpm 11 defaults to 1440 (24h); we extend it to 3 days.
+# caught and pulled. pnpm's default (since v11) is 1440 (24h); we extend it to 3 days.
 minimumReleaseAge: 4320
 
 # Explicitly approve which dependency install scripts may run (supply-chain

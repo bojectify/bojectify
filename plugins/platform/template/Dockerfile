@@ -1,6 +1,6 @@
 # Stage 1: Base
 FROM node:24-alpine AS base
-RUN corepack enable && corepack prepare pnpm@11.5.2 --activate
+RUN corepack enable && corepack prepare pnpm@12.9.0 --activate
 WORKDIR /app
 
 # Stage 2: Dependencies

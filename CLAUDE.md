@@ -13,6 +13,11 @@ React component library monorepo (`@bojectify`) managed by Nx 23.x with pnpm 12 
 | `@bojectify/react-reveal`      | `scope:react-reveal`      | CSS animation wrapper (fade/slide, RSC-compatible)    |
 | `@bojectify/react-carousel`    | `scope:react-carousel`    | CSS-only scroll-snap carousel (RSC-compatible)        |
 
+## Toolchain
+
+- **Node 24** is pinned in two places: `.nvmrc` (`24`), which nvm and CI read (CI via `actions/setup-node`'s `node-version-file`), and `devEngines.runtime` in the root `package.json` (`node@24`, `onFail: error`), which makes pnpm fail with `ERR_PNPM_BAD_RUNTIME_VERSION` under any other Node major. `template-verify.yml` pins its own `'24'` because it builds the platform template, not this repo
+- To bump Node, change `.nvmrc` and `devEngines.runtime.version` together. The CI job is named `main` (no matrix) and is the required status check in the `Branch Protection` ruleset
+
 ## Commands
 
 Always use `pnpm nx` (never a global `nx` install). Never use `npx` — use `pnpx` instead.

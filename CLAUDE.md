@@ -129,6 +129,7 @@ Run `pnpm nx lint <project>` to verify.
 
 ### Git Hooks (Lefthook)
 
+- Lefthook is a **host-installed binary** (`brew install lefthook`), not an npm dependency — there is no `prepare` script, so run `lefthook install` once per clone. `lefthook.yml` sets `min_version`. This keeps every dependency install script disabled in `allowBuilds`
 - **pre-commit**: lint + stylelint + format check (affected, uncommitted)
 - **pre-push**: test + typecheck + build (affected, vs origin/main)
 

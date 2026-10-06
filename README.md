@@ -13,9 +13,13 @@ Open source React component library monorepo, managed by [Nx](https://nx.dev) wi
 
 ## Getting Started
 
-**Prerequisites:** Node.js 22.13+ (CI uses 24), pnpm 11
+**Prerequisites:** Node.js 22.13+ (CI uses 24), pnpm 11, [Lefthook](https://lefthook.dev) 2.1.4+
 
 ```bash
+# Install the git hooks manager (once per machine), then the hooks (once per clone)
+brew install lefthook
+lefthook install
+
 # Install dependencies
 pnpm install
 
